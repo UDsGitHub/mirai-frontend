@@ -1,16 +1,6 @@
-"use client"
-
 import { Button } from "@/components/ui/button"
-import { useAuth } from "@clerk/nextjs"
-import { redirect } from "next/navigation"
 
 export default function Page() {
-  const { isSignedIn } = useAuth()
-
-  if (!isSignedIn) {
-    redirect("/sign-in")
-  }
-
   return (
     <div className="flex min-h-svh p-6">
       <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">

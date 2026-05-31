@@ -1,0 +1,1 @@
+export { default as CustomClerkProvider } from "./clerk/CustomClerkProvider"
