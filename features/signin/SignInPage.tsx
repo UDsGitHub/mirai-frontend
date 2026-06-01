@@ -64,8 +64,8 @@ export default function SignInPage() {
             to match your unique taste with deep insights into mood, pacing, and
             thematic elements.
           </p>
-          <div className="grid grid-cols-2 gap-4 pt-4">
-            <Card className="h-full bg-neutral-800/25 backdrop-blur-lg">
+          <div className="grid grid-cols-1 gap-4 pt-4 lg:grid-cols-2">
+            <Card className="h-full lg:row-span-1 bg-neutral-800/25 backdrop-blur-lg">
               <CardContent>
                 <div className="flex items-start gap-4">
                   <div className="rounded-full bg-[#00e5ff26] p-2">
@@ -80,7 +80,7 @@ export default function SignInPage() {
                 </div>
               </CardContent>
             </Card>
-            <Card className="h-full bg-neutral-800/25 backdrop-blur-lg">
+            <Card className="h-full lg:row-span-1 bg-neutral-800/25 backdrop-blur-lg">
               <CardContent>
                 <div className="flex items-start gap-4">
                   <div className="rounded-full bg-[#b026ff26] p-2">
@@ -111,7 +111,7 @@ export default function SignInPage() {
                 </div>
               </CardContent>
             </Card>
-            <div className="col-span-2 row-span-1">
+            <div className="col-span-1 lg:col-span-2 row-span-1">
               <Card className="bg-neutral-800/25 backdrop-blur-lg">
                 <CardHeader>
                   <CardTitle>
