@@ -26,28 +26,29 @@ import {
 } from "@/components/ui/avatar"
 
 const moodAnalysisData = [
-  { episode: "Ep 1", pacing: 42, mood: 52 },
-  { episode: "Ep 2", pacing: 68, mood: 72 },
-  { episode: "Ep 3", pacing: 55, mood: 60 },
-  { episode: "Ep 4", pacing: 28, mood: 35 },
-  { episode: "Ep 5", pacing: 48, mood: 55 },
-  { episode: "Ep 6", pacing: 50, mood: 58 },
+  { episode: "Ep 1", pacing: 52, mood: 18 },
+  { episode: "Ep 2", pacing: 72, mood: 24 },
+  { episode: "Ep 3", pacing: 60, mood: 21 },
+  { episode: "Ep 4", pacing: 35, mood: 12 },
+  { episode: "Ep 5", pacing: 55, mood: 19 },
+  { episode: "Ep 6", pacing: 58, mood: 20 },
 ]
 
 const chartConfig = {
-  pacing: {
-    label: "Pacing",
-    color: "var(--color-pacing)",
-  },
   mood: {
     label: "Mood",
-    color: "var(--color-mood)",
+    color: "#06B6D4",
+  },
+  pacing: {
+    label: "Pacing",
+    color: "#B026FF",
   },
 } satisfies ChartConfig
 
 export default function SignInPage() {
   return (
-    <div className="mx-auto flex h-full max-w-7xl items-center justify-center px-12">
+    <div className="relative mx-auto flex h-full max-w-7xl items-center justify-center px-12">
+      <div className="fixed left-1/2 top-1/2 h-[20%] w-[20%] -translate-x-1/2 -translate-y-1/2 bg-radial from-purple-500 from-40% via-cyan-500 via-60% to-transparent to-100% opacity-15 blur-3xl" />
       <div className="flex max-h-[734px] gap-12">
         <div className="">
           <Badge variant="outline" className="px-4 py-4">
@@ -64,7 +65,7 @@ export default function SignInPage() {
             thematic elements.
           </p>
           <div className="grid grid-cols-2 gap-4 pt-4">
-            <Card className="h-full bg-neutral-800/10 backdrop-blur-lg">
+            <Card className="h-full bg-neutral-800/25 backdrop-blur-lg">
               <CardContent>
                 <div className="flex items-start gap-4">
                   <div className="rounded-full bg-[#00e5ff26] p-2">
@@ -79,7 +80,7 @@ export default function SignInPage() {
                 </div>
               </CardContent>
             </Card>
-            <Card className="h-full bg-neutral-800/10 backdrop-blur-lg">
+            <Card className="h-full bg-neutral-800/25 backdrop-blur-lg">
               <CardContent>
                 <div className="flex items-start gap-4">
                   <div className="rounded-full bg-[#b026ff26] p-2">
@@ -111,7 +112,7 @@ export default function SignInPage() {
               </CardContent>
             </Card>
             <div className="col-span-2 row-span-1">
-              <Card className="bg-neutral-800/10 backdrop-blur-lg">
+              <Card className="bg-neutral-800/25 backdrop-blur-lg">
                 <CardHeader>
                   <CardTitle>
                     <div className="flex items-center gap-2">
@@ -151,18 +152,18 @@ export default function SignInPage() {
                         content={<ChartTooltipContent indicator="line" />}
                       />
                       <Area
-                        dataKey="pacing"
-                        type="natural"
-                        fill="var(--color-pacing)"
-                        fillOpacity={0.4}
-                        stroke="var(--color-pacing)"
-                      />
-                      <Area
                         dataKey="mood"
                         type="natural"
-                        fill="var(--color-mood)"
+                        fill="#B026FF"
                         fillOpacity={0.4}
-                        stroke="var(--color-mood)"
+                        stroke="#B026FF"
+                      />
+                      <Area
+                        dataKey="pacing"
+                        type="natural"
+                        fill="#06B6D4"
+                        fillOpacity={0.4}
+                        stroke="#06B6D4"
                       />
                     </AreaChart>
                   </ChartContainer>
