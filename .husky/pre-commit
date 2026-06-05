@@ -1,1 +1,1 @@
-npm run validate
+npm run codegen && npm run validate

@@ -1,9 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
-import { CustomClerkProvider } from "@/providers"
 import { Metadata } from "next"
+import App from "./app"
+import { CustomClerkProvider } from "@/providers"
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -13,8 +13,8 @@ const fontMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Mirai',
-  description: 'Discover Anime Engineered by AI',
+  title: "Mirai",
+  description: "Discover Anime Engineered by AI",
 }
 
 export default function RootLayout({
@@ -35,9 +35,9 @@ export default function RootLayout({
       )}
     >
       <body className="h-full">
-        <CustomClerkProvider>
-          <ThemeProvider>{children}</ThemeProvider>
-        </CustomClerkProvider>
+      <CustomClerkProvider>
+        <App>{children}</App>
+      </CustomClerkProvider>
       </body>
     </html>
   )
