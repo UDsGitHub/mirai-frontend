@@ -14,6 +14,7 @@
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
     "validate": "npm run lint && npm run typecheck",
+    "verify:ci-docker": "bash scripts/verify-ci-docker.sh",
     "prepare": "husky",
     "codegen": "graphql-codegen --config codegen.ts"
   },
