@@ -1,0 +1,12 @@
+query GetUser($id: String!) {
+  user(id: $id) {
+    userId
+    displayName
+    avatarUrl
+    birthDate
+    genrePreferences
+    tagPreferences
+    bio
+    createdAt
+  }
+}

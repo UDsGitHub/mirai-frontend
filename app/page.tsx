@@ -2,18 +2,9 @@
 
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@clerk/nextjs"
-import { useQuery } from "@apollo/client/react"
-import { HelloDocument } from "@/gql/graphql"
-import { useEffect } from "react"
 
 export default function Page() {
   const { signOut } = useAuth()
-
-  const { data } = useQuery(HelloDocument)
-
-  useEffect(() => {
-    console.log(data)
-  }, [data])
 
   return (
     <div className="flex min-h-svh p-6">

@@ -33,10 +33,9 @@ const appearance = {
       input: "rounded-lg py-6 px-4 bg-black/25!",
       formFieldInput: "border-border rounded-lg py-6 px-4",
       formButtonPrimary: `py-3 rounded-lg text-white text-sm font-semibold bg-linear-to-r from-cyan-500 to-purple-500 
-        border-none outline-none! ring-0! focus:ring-0! focus-visible:ring-0!
-        before:content-[''] before:absolute before:-inset-1 before:top-2 before:-z-10 
+        border-none before:content-[''] before:absolute before:-inset-1 before:top-2 before:-z-10 
         before:bg-purple-500 before:rounded-lg before:blur-xs before:opacity-25 before:duration-300 before:transition-all 
-        hover:before:opacity-35 hover:before:blur-sm
+        hover:before:opacity-35 hover:before:blur-sm duration-300 hover:-translate-y-0.5 focus:-translate-y-0.5
         `,
       buttonArrowIcon: "hidden",
     },

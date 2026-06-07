@@ -15,9 +15,11 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 type Documents = {
     "query Hello {\n  hello\n}": typeof types.HelloDocument,
+    "query GetUser($id: String!) {\n  user(id: $id) {\n    userId\n    displayName\n    avatarUrl\n    birthDate\n    genrePreferences\n    tagPreferences\n    bio\n    createdAt\n  }\n}": typeof types.GetUserDocument,
 };
 const documents: Documents = {
     "query Hello {\n  hello\n}": types.HelloDocument,
+    "query GetUser($id: String!) {\n  user(id: $id) {\n    userId\n    displayName\n    avatarUrl\n    birthDate\n    genrePreferences\n    tagPreferences\n    bio\n    createdAt\n  }\n}": types.GetUserDocument,
 };
 
 /**
@@ -38,6 +40,10 @@ export function gql(source: string): unknown;
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "query Hello {\n  hello\n}"): (typeof documents)["query Hello {\n  hello\n}"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "query GetUser($id: String!) {\n  user(id: $id) {\n    userId\n    displayName\n    avatarUrl\n    birthDate\n    genrePreferences\n    tagPreferences\n    bio\n    createdAt\n  }\n}"): (typeof documents)["query GetUser($id: String!) {\n  user(id: $id) {\n    userId\n    displayName\n    avatarUrl\n    birthDate\n    genrePreferences\n    tagPreferences\n    bio\n    createdAt\n  }\n}"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
