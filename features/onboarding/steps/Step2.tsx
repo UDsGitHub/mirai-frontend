@@ -3,9 +3,7 @@ import { Input } from "@/components/ui/input"
 import { motion } from "motion/react"
 import { useFormContext } from "react-hook-form"
 
-type Props = {}
-
-export default function Step2({}: Props) {
+export default function Step2() {
   const {
     register,
     formState: { errors },

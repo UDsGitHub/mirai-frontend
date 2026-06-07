@@ -27,8 +27,6 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar"
 import { motion } from "motion/react"
-import { useLazyQuery, useQuery } from "@apollo/client/react"
-import { GetUserDocument } from "@/gql/graphql"
 
 const moodAnalysisData = [
   { episode: "Ep 1", pacing: 52, mood: 18 },
@@ -61,26 +59,22 @@ function isSignInContentReady(container: HTMLElement) {
 }
 
 export default function SignInPage() {
-  const { isLoaded, userId } = useAuth()
+  const { isLoaded } = useAuth()
   const signInContainerRef = useRef<HTMLDivElement>(null)
-  const [isPageReady, setIsPageReady] = useState(false)
+  const [isSignInReady, setIsSignInReady] = useState(false)
+  const isPageReady = isLoaded && isSignInReady
 
   useEffect(() => {
-    if (!isLoaded) {
-      setIsPageReady(false)
-      return
-    }
+    if (!isLoaded) return
 
     const container = signInContainerRef.current
     if (!container) return
 
     const markReadyIfComplete = () => {
       if (isSignInContentReady(container)) {
-        setIsPageReady(true)
+        setIsSignInReady(true)
       }
     }
-
-    markReadyIfComplete()
 
     const observer = new MutationObserver(markReadyIfComplete)
     observer.observe(container, {
@@ -88,6 +82,8 @@ export default function SignInPage() {
       subtree: true,
       characterData: true,
     })
+
+    markReadyIfComplete()
 
     return () => observer.disconnect()
   }, [isLoaded])
@@ -126,7 +122,9 @@ export default function SignInPage() {
             <motion.div
               className="col-span-1 h-full lg:row-span-1"
               initial={{ opacity: 0, y: 25 }}
-              animate={isPageReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
+              animate={
+                isPageReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }
+              }
               transition={{ duration: 0.3, delay: isPageReady ? 0.1 : 0 }}
             >
               <Card className="h-full bg-neutral-800/25 backdrop-blur-lg">
@@ -148,7 +146,9 @@ export default function SignInPage() {
             <motion.div
               className="col-span-1 h-full lg:row-span-1"
               initial={{ opacity: 0, y: 25 }}
-              animate={isPageReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
+              animate={
+                isPageReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }
+              }
               transition={{ duration: 0.3, delay: isPageReady ? 0.1 : 0 }}
             >
               <Card className="h-full bg-neutral-800/25 backdrop-blur-lg">
@@ -187,7 +187,9 @@ export default function SignInPage() {
             <motion.div
               className="col-span-1 row-span-1 h-full lg:col-span-2"
               initial={{ opacity: 0, y: 25 }}
-              animate={isPageReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
+              animate={
+                isPageReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }
+              }
               transition={{ duration: 0.3, delay: isPageReady ? 0.2 : 0 }}
             >
               <Card className="bg-neutral-800/25 backdrop-blur-lg">
