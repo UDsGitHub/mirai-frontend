@@ -11,10 +11,9 @@ import { SquareLibrary } from "lucide-react"
 import { useEffect } from "react"
 import { useFormContext } from "react-hook-form"
 
-type Props = {}
 
-export default function GenreSelect({}: Props) {
-  const { data, loading, error } = useQuery(GetGenresDocument)
+export default function GenreSelect() {
+  const { data, loading } = useQuery(GetGenresDocument)
   const {
     register,
     formState: { errors },
@@ -51,7 +50,6 @@ export default function GenreSelect({}: Props) {
         <Badge variant={"outline"}>3 of 6 selected</Badge>
       </div>
       <ChipSelect
-        name="genrePreferences"
         caption={
           "Pick the genres you love most. Mirai will weight these heavily in your recommendations."
         }

@@ -5,7 +5,6 @@ import { ChipSelectOption } from "./types"
 import { UseFormRegisterReturn } from "react-hook-form"
 
 type Props = {
-  name?: string
   caption?: string
   options: ChipSelectOption[]
   register?: UseFormRegisterReturn<string>
@@ -27,7 +26,6 @@ const chipOptionClass = cn(
 )
 
 export default function ChipSelect({
-  name,
   caption,
   options,
   register,
