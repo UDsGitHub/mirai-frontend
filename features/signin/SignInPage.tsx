@@ -109,7 +109,7 @@ export default function SignInPage() {
           </Badge>
           <h1 className="pt-3 text-6xl font-bold">
             Discover Anime
-            <span className="block bg-linear-to-r from-cyan-500 to-purple-500 bg-clip-text text-5xl font-extrabold text-transparent">
+            <span className="block bg-linear-to-r from-cyan-500 to-purple-500 bg-clip-text font-extrabold text-transparent">
               Engineered by AI
             </span>
           </h1>

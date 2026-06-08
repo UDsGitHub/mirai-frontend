@@ -1,6 +1,6 @@
 "use client"
 
-import { CombinedSchemaType } from "@/components/multistep-form"
+import { CombinedSchemaInput } from "@/components/multistep-form"
 import { Input } from "@/components/ui/input"
 import { motion } from "motion/react"
 import { useFormContext } from "react-hook-form"
@@ -9,7 +9,7 @@ export default function Step1() {
   const {
     register,
     formState: { errors },
-  } = useFormContext<CombinedSchemaType>()
+  } = useFormContext<CombinedSchemaInput>()
 
   return (
     <motion.div

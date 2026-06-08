@@ -1,15 +1,15 @@
 import { ZodType } from "zod"
-import { CombinedSchemaType } from "./validators"
+import { CombinedSchemaInput } from "./validators"
 import { ComponentType } from "react"
 
-type FieldKeys = keyof CombinedSchemaType
+type FieldKeys = keyof CombinedSchemaInput
 
 export type FormStep = {
   title: string
   validationSchema: ZodType<unknown>
   component: React.ReactElement
   fields: FieldKeys[]
-  onBeforeNext?: (data: CombinedSchemaType) => Promise<void>
+  onBeforeNext?: (data: CombinedSchemaInput) => Promise<void>
   canSkip?: boolean
 }
 

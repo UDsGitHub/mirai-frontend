@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/80",
-        primary: `border-none bg-linear-to-r from-cyan-500 to-purple-500 text-sm font-semibold text-white before:absolute before:-inset-1 before:top-2 before:-z-10 before:rounded-lg before:bg-purple-500 before:opacity-25 before:blur-xs before:transition-all before:duration-300 before:content-[''] hover:before:opacity-35 hover:before:blur-sm duration-300 hover:-translate-y-0.5 focus:-translate-y-0.5`,
+        primary: `border-none bg-linear-to-r from-cyan-500 to-purple-500 text-sm font-semibold text-white duration-300 before:absolute before:-inset-1 before:top-2 before:-z-10 before:rounded-lg before:bg-cyan-500 before:opacity-25 before:blur-xs before:transition-all before:duration-300 before:content-[''] hover:-translate-y-0.5 hover:before:opacity-35 hover:before:blur-sm focus:-translate-y-0.5`,
         outline:
           "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
         secondary:
@@ -42,6 +42,8 @@ const buttonVariants = cva(
   }
 )
 
+export type ButtonVariantProps = VariantProps<typeof buttonVariants>
+
 function Button({
   className,
   variant = "default",
@@ -49,7 +51,7 @@ function Button({
   asChild = false,
   ...props
 }: React.ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
+  ButtonVariantProps & {
     asChild?: boolean
   }) {
   const Comp = asChild ? Slot.Root : "button"

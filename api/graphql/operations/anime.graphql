@@ -1,0 +1,15 @@
+query GetGenres {
+    genre {
+        id
+        name
+    }
+}
+
+query GetTags {
+    tag {
+        id
+        name
+        category
+        isAdult
+    }
+}

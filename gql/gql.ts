@@ -14,11 +14,11 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-    "query Hello {\n  hello\n}": typeof types.HelloDocument,
+    "query GetGenres {\n  genre {\n    id\n    name\n  }\n}\n\nquery GetTags {\n  tag {\n    id\n    name\n    category\n    isAdult\n  }\n}": typeof types.GetGenresDocument,
     "query GetUser($id: String!) {\n  user(id: $id) {\n    userId\n    displayName\n    avatarUrl\n    birthDate\n    genrePreferences\n    tagPreferences\n    bio\n    createdAt\n  }\n}": typeof types.GetUserDocument,
 };
 const documents: Documents = {
-    "query Hello {\n  hello\n}": types.HelloDocument,
+    "query GetGenres {\n  genre {\n    id\n    name\n  }\n}\n\nquery GetTags {\n  tag {\n    id\n    name\n    category\n    isAdult\n  }\n}": types.GetGenresDocument,
     "query GetUser($id: String!) {\n  user(id: $id) {\n    userId\n    displayName\n    avatarUrl\n    birthDate\n    genrePreferences\n    tagPreferences\n    bio\n    createdAt\n  }\n}": types.GetUserDocument,
 };
 
@@ -39,7 +39,7 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "query Hello {\n  hello\n}"): (typeof documents)["query Hello {\n  hello\n}"];
+export function gql(source: "query GetGenres {\n  genre {\n    id\n    name\n  }\n}\n\nquery GetTags {\n  tag {\n    id\n    name\n    category\n    isAdult\n  }\n}"): (typeof documents)["query GetGenres {\n  genre {\n    id\n    name\n  }\n}\n\nquery GetTags {\n  tag {\n    id\n    name\n    category\n    isAdult\n  }\n}"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

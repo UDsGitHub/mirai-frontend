@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { FormStep, LayoutComponentType } from "./types"
 import { FormProvider, useForm } from "react-hook-form"
-import { combinedSchema, CombinedSchemaType } from "./validators"
+import { combinedSchema, CombinedSchemaInput, CombinedSchemaType } from "./validators"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 type Props = {
@@ -26,9 +26,14 @@ export default function MultiStepForm({
 
   const [currentStep, setCurrentStep] = useState(0)
   const currentStepData = steps[currentStep]
-  const methods = useForm<CombinedSchemaType>({
+  const methods = useForm<CombinedSchemaInput, unknown, CombinedSchemaType>({
     resolver: zodResolver(combinedSchema),
-    defaultValues: {},
+    defaultValues: {
+      displayName: "",
+      birthDate: "",
+      genrePreferences: [],
+      tagPreferences: [],
+    },
   })
 
   const handleNext = async () => {
@@ -41,12 +46,9 @@ export default function MultiStepForm({
       await currentStepData.onBeforeNext(methods.getValues())
     }
 
-    const currentStepValues = methods.getValues(currentStepData.fields)
+    const values = methods.getValues()
     const formValues = Object.fromEntries(
-      currentStepData.fields.map((field, index) => [
-        field,
-        currentStepValues[index] || "",
-      ])
+      currentStepData.fields.map((field) => [field, values[field]])
     )
 
     if (currentStepData.validationSchema) {
@@ -55,7 +57,7 @@ export default function MultiStepForm({
 
       if (!validationResult.success) {
         validationResult.error.issues.forEach((err) => {
-          methods.setError(err.path.join(".") as keyof CombinedSchemaType, {
+          methods.setError(err.path.join(".") as keyof CombinedSchemaInput, {
             type: "manual",
             message: err.message,
           })

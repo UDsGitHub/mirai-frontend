@@ -1,7 +1,7 @@
 "use client"
 
 import { FormStep, MultiStepForm, step1Schema, step2Schema, step3Schema } from "@/components/multistep-form"
-import FormLayout from "./FormLayout"
+import FormLayout from "./layout/FormLayout"
 import {Step1, Step2, Step3} from "./steps"
 
 export default function OnboardingPage() {
