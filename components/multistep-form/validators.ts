@@ -1,4 +1,8 @@
-import { isValidMMDDYYYY, MM_DD_YYYY_PATTERN, parseMMDDYYYY } from "@/components/date-input"
+import {
+  isValidMMDDYYYY,
+  MM_DD_YYYY_PATTERN,
+  parseMMDDYYYY,
+} from "@/components/date-input"
 import { z } from "zod"
 
 export const step1Schema = z.object({
@@ -33,12 +37,12 @@ export const step2Schema = z.object({
 export const step3Schema = z.object({
   genrePreferences: z
     .array(z.number())
-    .min(3)
-    .max(6, { error: "You must select at least 3 genres" }),
+    .min(3, { error: "You must select at least 3 genres" })
+    .max(6, { error: "You must select at most 6 genres" }),
   tagPreferences: z
     .array(z.number())
-    .min(3)
-    .max(6, { error: "You must select at least 3 tags" }),
+    .min(3, { error: "You must select at least 3 tags" })
+    .max(6, { error: "You must select at most 6 tags" }),
 })
 
 export const combinedSchema = step1Schema

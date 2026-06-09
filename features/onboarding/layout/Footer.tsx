@@ -14,6 +14,8 @@ export default function Footer({
   handlePrevious,
   handleNext,
 }: Props) {
+  const isLastStep = currentStepIndex === totalSteps - 1
+
   return (
     <footer className="relative mt-auto flex h-23 items-center justify-between bg-linear-to-t from-background from-40% to-transparent">
       <div className="absolute top-1/2 left-4 -translate-y-1/2">
@@ -31,12 +33,10 @@ export default function Footer({
         <Button
           variant="primary"
           className="p-5"
-          type={currentStepIndex === totalSteps - 1 ? "submit" : "button"}
+          type="button"
           onClick={handleNext}
         >
-          <span>
-            {currentStepIndex === totalSteps - 1 ? "Complete" : "Next Step"}
-          </span>
+          <span>{isLastStep ? "Complete" : "Next Step"}</span>
           <ArrowRight className="size-4" />
         </Button>
       </div>

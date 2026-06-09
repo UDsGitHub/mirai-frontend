@@ -4,7 +4,7 @@ import { useState } from "react"
 import { FormStep, LayoutComponentType } from "./types"
 import { FormProvider, useForm } from "react-hook-form"
 import { combinedSchema, CombinedSchemaInput, CombinedSchemaType } from "./validators"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { MultiStepFormContext } from "./MultiStepFormContext"
 
 type Props = {
   LayoutComponent: LayoutComponentType
@@ -25,9 +25,9 @@ export default function MultiStepForm({
   }
 
   const [currentStep, setCurrentStep] = useState(0)
+  const [hasAttemptedStep, setHasAttemptedStep] = useState(false)
   const currentStepData = steps[currentStep]
   const methods = useForm<CombinedSchemaInput, unknown, CombinedSchemaType>({
-    resolver: zodResolver(combinedSchema),
     defaultValues: {
       displayName: "",
       birthDate: "",
@@ -35,40 +35,47 @@ export default function MultiStepForm({
       tagPreferences: [],
     },
   })
+  const { clearErrors, getValues, setError } = methods
+
+  const resetErrorState = () => {
+    setHasAttemptedStep(false)
+    clearErrors()
+  }
 
   const handleNext = async () => {
-    const isValid = await methods.trigger(currentStepData.fields)
-    if (!isValid) {
+    if (currentStepData.onBeforeNext) {
+      await currentStepData.onBeforeNext(getValues())
+    }
+
+    const values = getValues()
+    const isLastStep = currentStep === steps.length - 1
+    const dataToValidate = isLastStep
+      ? values
+      : Object.fromEntries(
+          currentStepData.fields.map((field) => [field, values[field]])
+        )
+    const schema = isLastStep ? combinedSchema : currentStepData.validationSchema
+    const validationResult = schema.safeParse(dataToValidate)
+
+    if (!validationResult.success) {
+      setHasAttemptedStep(true)
+      clearErrors(isLastStep ? undefined : currentStepData.fields)
+      validationResult.error.issues.forEach((err) => {
+        setError(err.path.join(".") as keyof CombinedSchemaInput, {
+          type: "manual",
+          message: err.message,
+        })
+      })
       return
     }
 
-    if (currentStepData.onBeforeNext) {
-      await currentStepData.onBeforeNext(methods.getValues())
+    if (isLastStep) {
+      await onComplete(validationResult.data as CombinedSchemaType)
+      return
     }
 
-    const values = methods.getValues()
-    const formValues = Object.fromEntries(
-      currentStepData.fields.map((field) => [field, values[field]])
-    )
-
-    if (currentStepData.validationSchema) {
-      const validationResult =
-        currentStepData.validationSchema.safeParse(formValues)
-
-      if (!validationResult.success) {
-        validationResult.error.issues.forEach((err) => {
-          methods.setError(err.path.join(".") as keyof CombinedSchemaInput, {
-            type: "manual",
-            message: err.message,
-          })
-        })
-        return
-      }
-    }
-
-    if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1)
-    }
+    resetErrorState()
+    setCurrentStep(currentStep + 1)
   }
 
   const handlePrevious = () => {
@@ -76,21 +83,27 @@ export default function MultiStepForm({
       return
     }
     setCurrentStep(currentStep - 1)
+    resetErrorState()
   }
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onComplete)} className="h-full">
-        <LayoutComponent
-          currentStepIndex={currentStep}
-          currentStep={currentStepData}
-          totalSteps={steps.length}
-          handleNext={handleNext}
-          handlePrevious={handlePrevious}
+    <MultiStepFormContext.Provider value={{ hasAttemptedStep }}>
+      <FormProvider {...methods}>
+        <form
+          onSubmit={(event) => event.preventDefault()}
+          className="h-full"
         >
-          {currentStepData.component}
-        </LayoutComponent>
-      </form>
-    </FormProvider>
+          <LayoutComponent
+            currentStepIndex={currentStep}
+            currentStep={currentStepData}
+            totalSteps={steps.length}
+            handleNext={handleNext}
+            handlePrevious={handlePrevious}
+          >
+            {currentStepData.component}
+          </LayoutComponent>
+        </form>
+      </FormProvider>
+    </MultiStepFormContext.Provider>
   )
 }

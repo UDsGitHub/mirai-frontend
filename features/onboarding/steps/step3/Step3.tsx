@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge"
 import { WandSparkles } from "lucide-react"
 import { motion } from "motion/react"
 import GenreSelect from "./GenreSelect"
+import TagSelect from "./TagSelect"
 
 
 export default function Step3() {
@@ -12,7 +13,7 @@ export default function Step3() {
       transition={{ duration: 0.3, ease: "easeInOut" }}
       className="flex h-full"
     >
-      <div className="flex flex-[60%] flex-col gap-12 border-r border-border px-[6%] py-12">
+      <div className="flex flex-[60%] flex-col gap-12 border-r border-border px-[6%] py-12 overflow-y-auto">
         <div>
           <h1 className="pt-3 text-4xl font-bold">
             Initialize your{" "}
@@ -26,6 +27,7 @@ export default function Step3() {
           </p>
         </div>
         <GenreSelect />
+        <TagSelect />
       </div>
       <div className="flex-[40%] p-8">
         <div className="flex items-center justify-between">

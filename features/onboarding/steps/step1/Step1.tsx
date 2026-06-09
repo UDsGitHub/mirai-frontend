@@ -1,11 +1,15 @@
 "use client"
 
-import { CombinedSchemaInput } from "@/components/multistep-form"
+import {
+  CombinedSchemaInput,
+  useMultiStepForm,
+} from "@/components/multistep-form"
 import { Input } from "@/components/ui/input"
 import { motion } from "motion/react"
 import { useFormContext } from "react-hook-form"
 
 export default function Step1() {
+  const { hasAttemptedStep } = useMultiStepForm()
   const {
     register,
     formState: { errors },
@@ -28,7 +32,7 @@ export default function Step1() {
           className="px-4 py-6 text-center text-2xl! font-semibold"
           variant={"underline"}
         />
-        {errors.displayName && (
+        {hasAttemptedStep && errors.displayName && (
           <p className="text-sm text-red-500 dark:text-red-300">{errors.displayName.message}</p>
         )}
       </div>

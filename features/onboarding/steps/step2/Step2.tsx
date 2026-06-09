@@ -1,13 +1,19 @@
 import { DateInput } from "@/components/date-input"
-import { CombinedSchemaInput } from "@/components/multistep-form"
+import {
+  CombinedSchemaInput,
+  useMultiStepForm,
+} from "@/components/multistep-form"
 import { motion } from "motion/react"
 import { Controller, useFormContext } from "react-hook-form"
 
 export default function Step2() {
+  const { hasAttemptedStep } = useMultiStepForm()
   const {
     control,
     formState: { errors },
   } = useFormContext<CombinedSchemaInput>()
+
+  console.log("step2 errors", errors)
 
   return (
     <motion.div
@@ -37,7 +43,7 @@ export default function Step2() {
             />
           )}
         />
-        {errors.birthDate && (
+        {hasAttemptedStep && errors.birthDate && (
           <p className="text-sm text-red-500 dark:text-red-300">
             {errors.birthDate.message}
           </p>

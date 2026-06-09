@@ -8,20 +8,33 @@ import {
 } from "@/components/multistep-form"
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
-import { GetGenresDocument } from "@/gql/graphql"
+import { GetTagsDocument, GetTagsQuery } from "@/gql/graphql"
 import { useQuery } from "@apollo/client/react"
 import { SquareLibrary } from "lucide-react"
 import { useFormContext } from "react-hook-form"
 
-export default function GenreSelect() {
-  const { data, loading } = useQuery(GetGenresDocument)
+const arrangeTagsByCategory = (tags: GetTagsQuery["tag"]) => {
+  return tags.reduce(
+    (acc, tag) => {
+      if (tag.category in acc) {
+        acc[tag.category].push(tag)
+        return acc
+      } else {
+        acc[tag.category] = [tag]
+        return acc
+      }
+    },
+    {} as Record<string, GetTagsQuery["tag"]>
+  )
+}
+
+export default function TagSelect() {
+  const { data, loading } = useQuery(GetTagsDocument)
   const { hasAttemptedStep } = useMultiStepForm()
   const {
     register,
     formState: { errors },
   } = useFormContext<CombinedSchemaInput>()
-
-  console.log("genre select errors", errors)
 
   if (loading || !data) {
     return (
@@ -47,16 +60,22 @@ export default function GenreSelect() {
         </div>
         <Badge variant={"outline"}>3 of 6 selected</Badge>
       </div>
-      <ChipSelect
-        caption={
-          "Pick the genres you love most. Mirai will weight these heavily in your recommendations."
+      {Object.entries(arrangeTagsByCategory(data.tag)).map(
+        ([category, tags]) => {
+          return (
+            <div key={category}>
+              <h4>{category}</h4>
+              <ChipSelect
+                options={tags.map((tag) => ({
+                  value: tag.id.toString(),
+                  label: tag.name,
+                }))}
+                register={register("genrePreferences")}
+              />
+            </div>
+          )
         }
-        options={data.genre.map((genre) => ({
-          value: genre.id.toString(),
-          label: genre.name,
-        }))}
-        register={register("genrePreferences")}
-      />
+      )}
       {hasAttemptedStep && errors.genrePreferences && (
         <p className="text-sm text-red-500 dark:text-red-300">
           {errors.genrePreferences.message}

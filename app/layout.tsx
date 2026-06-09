@@ -34,10 +34,30 @@ export default function RootLayout({
         "h-full"
       )}
     >
+      <head>
+        <link rel="icon" href="/assets/favicon/favicon.svg" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/assets/favicon/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/assets/favicon/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/assets/favicon/favicon-16x16.png"
+        />
+      </head>
       <body className="h-full">
-      <CustomClerkProvider>
-        <App>{children}</App>
-      </CustomClerkProvider>
+        <CustomClerkProvider>
+          <App>{children}</App>
+        </CustomClerkProvider>
       </body>
     </html>
   )
