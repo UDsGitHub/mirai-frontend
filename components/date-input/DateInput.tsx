@@ -13,6 +13,7 @@ type Props = {
   className?: string
   variant?: "underline" | "outlined"
   "aria-invalid"?: boolean
+  autoFocus?: boolean
 }
 
 export default function DateInput({
@@ -25,6 +26,7 @@ export default function DateInput({
   className,
   variant,
   "aria-invalid": ariaInvalid,
+  autoFocus = false,
 }: Props) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const digits = event.target.value.replace(/\D/g, "").slice(0, 8)
@@ -50,6 +52,7 @@ export default function DateInput({
       className={className}
       variant={variant}
       aria-invalid={ariaInvalid}
+      autoFocus={autoFocus}
     />
   )
 }

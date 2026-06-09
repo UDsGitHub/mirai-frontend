@@ -31,6 +31,7 @@ export default function Step1() {
           placeholder="Enter your display name"
           className="px-4 py-6 text-center text-2xl! font-semibold"
           variant={"underline"}
+          autoFocus
         />
         {hasAttemptedStep && errors.displayName && (
           <p className="text-sm text-red-500 dark:text-red-300">{errors.displayName.message}</p>

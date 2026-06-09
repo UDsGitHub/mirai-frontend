@@ -4,13 +4,14 @@ import { ChipSelect } from "@/components/chip-select"
 import { ChipLoader } from "@/components/loader"
 import {
   CombinedSchemaInput,
+  MAX_SELECTABLE_TAGS,
   useMultiStepForm,
 } from "@/components/multistep-form"
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
 import { GetTagsDocument, GetTagsQuery } from "@/gql/graphql"
 import { useQuery } from "@apollo/client/react"
-import { SquareLibrary } from "lucide-react"
+import { Tags } from "lucide-react"
 import { useFormContext } from "react-hook-form"
 
 const arrangeTagsByCategory = (tags: GetTagsQuery["tag"]) => {
@@ -34,7 +35,12 @@ export default function TagSelect() {
   const {
     register,
     formState: { errors },
+    watch,
   } = useFormContext<CombinedSchemaInput>()
+
+  const selectedTags = watch("tagPreferences", [])
+  const selectedValues = selectedTags.map(String)
+  const atMax = selectedValues.length >= MAX_SELECTABLE_TAGS
 
   if (loading || !data) {
     return (
@@ -55,10 +61,12 @@ export default function TagSelect() {
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <SquareLibrary className="size-6 text-cyan-300" />
-          <span className="text-xl font-semibold">Core Genres</span>
+          <Tags className="size-6 text-cyan-300" />
+          <span className="text-xl font-semibold">Preferred Tags & Tropes</span>
         </div>
-        <Badge variant={"outline"}>3 of 6 selected</Badge>
+        <Badge variant={"outline"}>
+          {selectedValues.length} of {MAX_SELECTABLE_TAGS} selected
+        </Badge>
       </div>
       {Object.entries(arrangeTagsByCategory(data.tag)).map(
         ([category, tags]) => {
@@ -70,15 +78,17 @@ export default function TagSelect() {
                   value: tag.id.toString(),
                   label: tag.name,
                 }))}
-                register={register("genrePreferences")}
+                register={register("tagPreferences")}
+                selectedValues={selectedValues}
+                disableUnselected={atMax}
               />
             </div>
           )
         }
       )}
-      {hasAttemptedStep && errors.genrePreferences && (
+      {hasAttemptedStep && errors.tagPreferences && (
         <p className="text-sm text-red-500 dark:text-red-300">
-          {errors.genrePreferences.message}
+          {errors.tagPreferences.message}
         </p>
       )}
     </div>

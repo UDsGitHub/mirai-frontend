@@ -34,15 +34,28 @@ export const step2Schema = z.object({
   ),
 })
 
+export const MIN_SELECTABLE_GENRES = 3
+export const MAX_SELECTABLE_GENRES = 6
+export const MIN_SELECTABLE_TAGS = 3
+export const MAX_SELECTABLE_TAGS = 6
+
 export const step3Schema = z.object({
   genrePreferences: z
-    .array(z.number())
-    .min(3, { error: "You must select at least 3 genres" })
-    .max(6, { error: "You must select at most 6 genres" }),
+    .array(z.coerce.number())
+    .min(MIN_SELECTABLE_GENRES, {
+      error: `You must select at least ${MIN_SELECTABLE_GENRES} genres`,
+    })
+    .max(MAX_SELECTABLE_GENRES, {
+      error: `You must select at most ${MAX_SELECTABLE_GENRES} genres`,
+    }),
   tagPreferences: z
-    .array(z.number())
-    .min(3, { error: "You must select at least 3 tags" })
-    .max(6, { error: "You must select at most 6 tags" }),
+    .array(z.coerce.number())
+    .min(MIN_SELECTABLE_TAGS, {
+      error: `You must select at least ${MIN_SELECTABLE_TAGS} tags`,
+    })
+    .max(MAX_SELECTABLE_TAGS, {
+      error: `You must select at most ${MAX_SELECTABLE_TAGS} tags`,
+    }),
 })
 
 export const combinedSchema = step1Schema

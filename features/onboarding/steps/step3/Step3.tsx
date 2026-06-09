@@ -4,6 +4,7 @@ import { motion } from "motion/react"
 import GenreSelect from "./GenreSelect"
 import TagSelect from "./TagSelect"
 
+const scrollUnderFooterClass = "pb-[92px]"
 
 export default function Step3() {
   return (
@@ -11,9 +12,11 @@ export default function Step3() {
       initial={{ opacity: 0, x: 10 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="flex h-full"
+      className="flex h-full min-h-0"
     >
-      <div className="flex flex-[60%] flex-col gap-12 border-r border-border px-[6%] py-12 overflow-y-auto">
+      <div
+        className={`flex min-h-0 flex-[60%] flex-col gap-12 overflow-y-auto border-r border-border px-[6%] py-12 ${scrollUnderFooterClass}`}
+      >
         <div>
           <h1 className="pt-3 text-4xl font-bold">
             Initialize your{" "}
@@ -29,7 +32,9 @@ export default function Step3() {
         <GenreSelect />
         <TagSelect />
       </div>
-      <div className="flex-[40%] p-8">
+      <div
+        className={`min-h-0 flex-[40%] overflow-y-auto p-8 ${scrollUnderFooterClass}`}
+      >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 text-cyan-300">
             <WandSparkles className="size-4" />{" "}

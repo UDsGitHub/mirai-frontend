@@ -26,5 +26,13 @@ export default function OnboardingPage() {
     }
   ]
 
-  return <MultiStepForm LayoutComponent={FormLayout} steps={steps} onComplete={() => Promise.resolve()} />
+  return (
+    <div className="h-svh overflow-hidden">
+      <MultiStepForm
+        LayoutComponent={FormLayout}
+        steps={steps}
+        onComplete={() => Promise.resolve()}
+      />
+    </div>
+  )
 }

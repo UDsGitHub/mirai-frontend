@@ -91,7 +91,7 @@ export default function MultiStepForm({
       <FormProvider {...methods}>
         <form
           onSubmit={(event) => event.preventDefault()}
-          className="h-full"
+          className="flex h-full min-h-0 flex-col"
         >
           <LayoutComponent
             currentStepIndex={currentStep}

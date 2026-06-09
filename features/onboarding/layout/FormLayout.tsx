@@ -2,7 +2,8 @@
 
 import { LayoutComponentProps } from "@/components/multistep-form"
 import Footer from "./Footer"
-import Header from "./Header"
+import Header, { HEADER_HEIGHT_CLASS } from "./Header"
+import { cn } from "@/lib/utils"
 
 export default function FormLayout({
   children,
@@ -13,13 +14,14 @@ export default function FormLayout({
   handlePrevious,
 }: LayoutComponentProps) {
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full min-h-0 flex-col">
       <Header
         currentStepIndex={currentStepIndex}
         currentStep={currentStep}
         totalSteps={totalSteps}
       />
-      <div className="flex-1">{children}</div>
+      <div className={cn(HEADER_HEIGHT_CLASS, "shrink-0")} aria-hidden />
+      <div className="min-h-0 flex-1">{children}</div>
       <Footer
         currentStepIndex={currentStepIndex}
         totalSteps={totalSteps}

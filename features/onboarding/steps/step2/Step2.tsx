@@ -13,8 +13,6 @@ export default function Step2() {
     formState: { errors },
   } = useFormContext<CombinedSchemaInput>()
 
-  console.log("step2 errors", errors)
-
   return (
     <motion.div
       initial={{ opacity: 0, x: 10 }}
@@ -40,6 +38,7 @@ export default function Step2() {
               className="px-4 py-6 text-center text-2xl! font-semibold"
               variant="underline"
               aria-invalid={fieldState.invalid}
+              autoFocus
             />
           )}
         />

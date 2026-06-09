@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
+export const FOOTER_HEIGHT_CLASS = "h-[92px]"
+
 type Props = {
   currentStepIndex: number
   totalSteps: number
@@ -17,8 +19,8 @@ export default function Footer({
   const isLastStep = currentStepIndex === totalSteps - 1
 
   return (
-    <footer className="relative mt-auto flex h-23 items-center justify-between bg-linear-to-t from-background from-40% to-transparent">
-      <div className="absolute top-1/2 left-4 -translate-y-1/2">
+    <footer className="pointer-events-none fixed right-0 bottom-0 left-0 z-20 flex h-[92px] bg-linear-to-t from-background from-40% to-transparent">
+      <div className="pointer-events-auto absolute top-1/2 left-4 -translate-y-1/2">
         <Button
           variant="outline"
           className="p-5"
@@ -29,7 +31,7 @@ export default function Footer({
           <span>Back</span>
         </Button>
       </div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div className="pointer-events-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <Button
           variant="primary"
           className="p-5"

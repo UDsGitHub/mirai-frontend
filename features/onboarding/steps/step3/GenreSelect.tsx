@@ -4,6 +4,7 @@ import { ChipSelect } from "@/components/chip-select"
 import { ChipLoader } from "@/components/loader"
 import {
   CombinedSchemaInput,
+  MAX_SELECTABLE_GENRES,
   useMultiStepForm,
 } from "@/components/multistep-form"
 import { Badge } from "@/components/ui/badge"
@@ -19,9 +20,12 @@ export default function GenreSelect() {
   const {
     register,
     formState: { errors },
+    watch,
   } = useFormContext<CombinedSchemaInput>()
 
-  console.log("genre select errors", errors)
+  const selectedGenres = watch("genrePreferences", [])
+  const selectedValues = selectedGenres.map(String)
+  const atMax = selectedValues.length >= MAX_SELECTABLE_GENRES
 
   if (loading || !data) {
     return (
@@ -45,7 +49,9 @@ export default function GenreSelect() {
           <SquareLibrary className="size-6 text-cyan-300" />
           <span className="text-xl font-semibold">Core Genres</span>
         </div>
-        <Badge variant={"outline"}>3 of 6 selected</Badge>
+        <Badge variant={"outline"}>
+          {selectedValues.length} of {MAX_SELECTABLE_GENRES} selected
+        </Badge>
       </div>
       <ChipSelect
         caption={
@@ -56,6 +62,8 @@ export default function GenreSelect() {
           label: genre.name,
         }))}
         register={register("genrePreferences")}
+        selectedValues={selectedValues}
+        disableUnselected={atMax}
       />
       {hasAttemptedStep && errors.genrePreferences && (
         <p className="text-sm text-red-500 dark:text-red-300">
