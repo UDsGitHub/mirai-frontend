@@ -3,6 +3,7 @@ import { WandSparkles } from "lucide-react"
 import { motion } from "motion/react"
 import GenreSelect from "./GenreSelect"
 import TagSelect from "./TagSelect"
+import Recommendations from "./Recommendations"
 
 const scrollUnderFooterClass = "pb-[92px]"
 
@@ -43,20 +44,11 @@ export default function Step3() {
             </span>
           </div>
           <Badge variant={"secondary"}>
-            <motion.div
-              initial={{ opacity: 1 }}
-              animate={{ opacity: 0.2 }}
-              transition={{
-                duration: 1.5,
-                ease: "linear",
-                repeat: Infinity,
-                repeatType: "reverse",
-              }}
-              className="h-1 w-1 rounded-full bg-cyan-300"
-            />
+            <div className="h-1 w-1 animate-pulse rounded-full bg-cyan-300" />
             <span>Adapting to your picks</span>
           </Badge>
         </div>
+        <Recommendations />
       </div>
     </motion.div>
   )

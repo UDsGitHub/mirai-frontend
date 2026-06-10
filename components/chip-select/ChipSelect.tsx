@@ -70,7 +70,8 @@ export default function ChipSelect({
       )}
       <div
         className={cn(
-          "relative mt-4 flex flex-wrap items-center gap-3",
+          "relative flex flex-wrap items-center gap-3",
+          caption ? 'mt-4' : '',
           chipSelectStyles?.wrapperClassName
         )}
       >

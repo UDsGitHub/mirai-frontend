@@ -53,18 +53,20 @@ export default function GenreSelect() {
           {selectedValues.length} of {MAX_SELECTABLE_GENRES} selected
         </Badge>
       </div>
-      <ChipSelect
-        caption={
-          "Pick the genres you love most. Mirai will weight these heavily in your recommendations."
-        }
-        options={data.genre.map((genre) => ({
-          value: genre.id.toString(),
-          label: genre.name,
-        }))}
-        register={register("genrePreferences")}
-        selectedValues={selectedValues}
-        disableUnselected={atMax}
-      />
+      <div className="pt-3">
+        <ChipSelect
+          caption={
+            "Pick the genres you love most. Mirai will weight these heavily in your recommendations."
+          }
+          options={data.genre.map((genre) => ({
+            value: genre.id.toString(),
+            label: genre.name,
+          }))}
+          register={register("genrePreferences")}
+          selectedValues={selectedValues}
+          disableUnselected={atMax}
+        />
+      </div>
       {hasAttemptedStep && errors.genrePreferences && (
         <p className="text-sm text-red-500 dark:text-red-300">
           {errors.genrePreferences.message}

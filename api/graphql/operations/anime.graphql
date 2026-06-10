@@ -13,3 +13,19 @@ query GetTags {
         isAdult
     }
 }
+
+query GetPreviewRecommendations($input: PreviewRecommendationsInput!) {
+    previewRecommendations(input: $input) {
+        id
+        titleRomaji
+        titleEnglish
+        synopsis
+        episodeCount
+        status
+        averageScore
+        coverUrl
+        genres
+        tags
+        matchPercentage
+    }
+}

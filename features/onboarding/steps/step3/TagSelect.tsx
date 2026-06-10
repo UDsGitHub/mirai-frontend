@@ -68,11 +68,17 @@ export default function TagSelect() {
           {selectedValues.length} of {MAX_SELECTABLE_TAGS} selected
         </Badge>
       </div>
+      <p className="pt-3 text-sm font-medium text-muted-foreground">
+        Fine-tune your taste profile with specific narrative and aesthetic
+        themes you enjoy.
+      </p>
       {Object.entries(arrangeTagsByCategory(data.tag)).map(
         ([category, tags]) => {
           return (
-            <div key={category}>
-              <h4>{category}</h4>
+            <div key={category} className="py-3">
+              <h4 className="pb-3 text-sm text-muted-foreground uppercase">
+                {category}
+              </h4>
               <ChipSelect
                 options={tags.map((tag) => ({
                   value: tag.id.toString(),
