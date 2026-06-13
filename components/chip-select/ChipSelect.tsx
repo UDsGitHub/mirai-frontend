@@ -109,7 +109,7 @@ export default function ChipSelect({
         })}
       </div>
       {options.length > DEFAULT_DISPLAY_LIMIT && (
-        <div className="flex h-12 items-center justify-center bg-linear-to-t from-background from-40% to-transparent">
+        <div className="flex h-12 items-center justify-center">
           {!showMore ? (
             <Button
               variant="link"

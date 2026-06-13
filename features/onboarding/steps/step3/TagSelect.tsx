@@ -9,24 +9,32 @@ import {
 } from "@/components/multistep-form"
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
-import { GetTagsDocument, GetTagsQuery } from "@/gql/graphql"
+import { useFragment } from "@/gql"
+import {
+  GetTagsDocument,
+  GetTagsQuery,
+  TagInfoFragment,
+  TagInfoFragmentDoc,
+} from "@/gql/graphql"
 import { useQuery } from "@apollo/client/react"
 import { Tags } from "lucide-react"
 import { useFormContext } from "react-hook-form"
 
 const arrangeTagsByCategory = (tags: GetTagsQuery["tag"]) => {
-  return tags.reduce(
-    (acc, tag) => {
-      if (tag.category in acc) {
-        acc[tag.category].push(tag)
-        return acc
-      } else {
-        acc[tag.category] = [tag]
-        return acc
-      }
-    },
-    {} as Record<string, GetTagsQuery["tag"]>
-  )
+  return tags
+    .map((tag) => useFragment(TagInfoFragmentDoc, tag))
+    .reduce(
+      (acc, tag) => {
+        if (tag.category in acc) {
+          acc[tag.category].push(tag)
+          return acc
+        } else {
+          acc[tag.category] = [tag]
+          return acc
+        }
+      },
+      {} as Record<string, TagInfoFragment[]>
+    )
 }
 
 export default function TagSelect() {

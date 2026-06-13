@@ -9,7 +9,8 @@ import {
 } from "@/components/multistep-form"
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
-import { GetGenresDocument } from "@/gql/graphql"
+import { useFragment } from "@/gql"
+import { GenreInfoFragmentDoc, GetGenresDocument } from "@/gql/graphql"
 import { useQuery } from "@apollo/client/react"
 import { SquareLibrary } from "lucide-react"
 import { useFormContext } from "react-hook-form"
@@ -58,7 +59,7 @@ export default function GenreSelect() {
           caption={
             "Pick the genres you love most. Mirai will weight these heavily in your recommendations."
           }
-          options={data.genre.map((genre) => ({
+          options={data.genre.map(genre => useFragment(GenreInfoFragmentDoc, genre)).map((genre) => ({
             value: genre.id.toString(),
             label: genre.name,
           }))}

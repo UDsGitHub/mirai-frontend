@@ -1,16 +1,24 @@
+fragment GenreInfo on Genre {
+    id
+    name
+}
+
+fragment TagInfo on Tag {
+    id
+    name
+    category
+    isAdult
+}
+
 query GetGenres {
     genre {
-        id
-        name
+        ...GenreInfo
     }
 }
 
 query GetTags {
     tag {
-        id
-        name
-        category
-        isAdult
+        ...TagInfo
     }
 }
 
@@ -24,8 +32,12 @@ query GetPreviewRecommendations($input: PreviewRecommendationsInput!) {
         status
         averageScore
         coverUrl
-        genres
-        tags
+        genres {
+            ...GenreInfo
+        }
+        tags {
+            ...TagInfo
+        }
         matchPercentage
     }
 }

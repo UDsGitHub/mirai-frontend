@@ -4,6 +4,7 @@ import { motion } from "motion/react"
 import GenreSelect from "./GenreSelect"
 import TagSelect from "./TagSelect"
 import Recommendations from "./Recommendations"
+import { cn } from "@/lib/utils"
 
 const scrollUnderFooterClass = "pb-[92px]"
 
@@ -13,7 +14,11 @@ export default function Step3() {
       initial={{ opacity: 0, x: 10 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="flex h-full min-h-0"
+      className={cn(
+        "relative flex h-full min-h-0",
+        "bg-background bg-[url('/assets/images/hxh_bg.png')] bg-contain bg-center bg-no-repeat bg-blend-multiply",
+        "before:pointer-events-none before:absolute before:inset-0 before:bg-background before:bg-[url('/assets/images/hxh_bg.png')] before:bg-contain before:bg-center before:bg-no-repeat before:opacity-5 before:mix-blend-luminosity before:content-['']"
+      )}
     >
       <div
         className={`flex min-h-0 flex-[60%] flex-col gap-12 overflow-y-auto border-r border-border px-[6%] py-12 ${scrollUnderFooterClass}`}
