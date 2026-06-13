@@ -2,21 +2,40 @@
 
 import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
-import { Skeleton } from "@/components/ui/skeleton"
-import { useMemo } from "react"
-import { useRecommendationState } from "./useRecommendationState"
 import {
+  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-import { RadarChart, PolarAngleAxis, PolarGrid, Radar } from "recharts"
+import { Skeleton } from "@/components/ui/skeleton"
+import { motion } from "motion/react"
+import { useMemo } from "react"
+import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts"
+import { useRecommendationState } from "./useRecommendationState"
+
+const chartConfig = {
+  value: {
+    label: "Taste",
+    color: "#06B6D4",
+  },
+} satisfies ChartConfig
 
 export default function Recommendations() {
-  const { data, loading, chartConfig, chartData } = useRecommendationState()
+  const { previews, loading, chartData, canFetch } = useRecommendationState()
+
+  const chartKey = chartData.map((point) => point.label).join("|")
 
   const recommendationsList = useMemo(() => {
-    if (loading || !data) {
+    if (!canFetch) {
+      return (
+        <p className="pt-6 text-sm text-muted-foreground">
+          Select at least 3 genres and 3 tags to preview your taste matrix.
+        </p>
+      )
+    }
+
+    if (loading || previews.length === 0) {
       return (
         <div className="scrollbar-hide flex items-center gap-4 overflow-x-auto pt-6 pb-4">
           {Array.from({ length: 6 }).map((_, index) => (
@@ -28,13 +47,13 @@ export default function Recommendations() {
 
     return (
       <div className="scrollbar-hide flex items-center gap-4 overflow-x-auto pt-6 pb-4">
-        {data.previewRecommendations.map((recommendation) => (
+        {previews.map((preview) => (
           <Card
-            key={recommendation.id}
+            key={preview.id}
             className="relative h-90 w-60 shrink-0 rounded-md bg-cover bg-center"
             style={{
-              backgroundImage: recommendation.coverUrl
-                ? `url("${recommendation.coverUrl}")`
+              backgroundImage: preview.coverUrl
+                ? `url("${preview.coverUrl}")`
                 : undefined,
             }}
           >
@@ -43,12 +62,14 @@ export default function Recommendations() {
                 variant={"outline"}
                 className="absolute top-4 right-4 rounded-sm border border-cyan-500 bg-cyan-950/90 text-cyan-500"
               >
-                {recommendation.matchPercentage}% Match
+                {preview.matchPercentage}% Match
               </Badge>
               <div className="absolute right-4 bottom-4 left-4">
-                <h6 className="font-bold">{recommendation.titleEnglish}</h6>
+                <h6 className="font-bold">
+                  {preview.titleEnglish ?? preview.titleRomaji}
+                </h6>
                 <p className="truncate text-xs">
-                  {recommendation.genres?.join(" \u2022 ")}
+                  {preview.genreNames.join(" \u2022 ")}
                 </p>
               </div>
             </div>
@@ -56,31 +77,43 @@ export default function Recommendations() {
         ))}
       </div>
     )
-  }, [data, loading])
+  }, [canFetch, loading, previews])
 
   return (
     <div className="pt-4">
       <h4 className="font-semibold">Projected Recommendations</h4>
       {recommendationsList}
-      <ChartContainer
-        config={chartConfig}
-        className="mx-auto aspect-square max-h-[250px]"
-      >
-        <RadarChart data={chartData}>
-          <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-          <PolarAngleAxis dataKey="month" />
-          <PolarGrid />
-          <Radar
-            dataKey="taste"
-            fill="#06B6D4"
-            fillOpacity={0.6}
-            dot={{
-              r: 4,
-              fillOpacity: 1,
-            }}
-          />
-        </RadarChart>
-      </ChartContainer>
+      {chartData.length > 0 && (
+        <motion.div
+          key={chartKey}
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+        >
+          <ChartContainer
+            config={chartConfig}
+            className="mx-auto aspect-square max-h-[250px]"
+          >
+            <RadarChart data={chartData}>
+              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+              <PolarAngleAxis dataKey="label" />
+              <PolarGrid />
+              <Radar
+                dataKey="value"
+                fill="var(--color-value)"
+                fillOpacity={0.6}
+                isAnimationActive
+                animationDuration={900}
+                animationEasing="ease-out"
+                dot={{
+                  r: 4,
+                  fillOpacity: 1,
+                }}
+              />
+            </RadarChart>
+          </ChartContainer>
+        </motion.div>
+      )}
     </div>
   )
 }

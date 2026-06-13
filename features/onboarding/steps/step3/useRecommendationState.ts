@@ -1,66 +1,88 @@
 import {
   CombinedSchemaInput,
-  MAX_SELECTABLE_GENRES,
+  MIN_SELECTABLE_GENRES,
+  MIN_SELECTABLE_TAGS,
 } from "@/components/multistep-form"
-import { ChartConfig } from "@/components/ui/chart"
 import {
   GenreInfoFragmentDoc,
+  GetGenresDocument,
   GetPreviewRecommendationsDocument,
+  GetPreviewRecommendationsQuery,
+  GetTagsDocument,
   TagInfoFragmentDoc,
 } from "@/gql/graphql"
 import { getFragmentData } from "@/gql"
 import { useDebounce } from "@/hooks"
-import { useLazyQuery } from "@apollo/client/react"
+import { useLazyQuery, useQuery } from "@apollo/client/react"
 import { useEffect, useMemo } from "react"
 import { useFormContext } from "react-hook-form"
-
-type RecommendationAxis = {
-  id: number
-  kind: "genre" | "tag"
-}
-
-type TasteAxis = {
-  label: string
-  value: number
-}
+import {
+  buildTasteChartData,
+  NormalizedPreview,
+  pickMatrixAxes,
+  TasteChartPoint,
+} from "./taste-matrix"
 
 const DEBOUNCE_DELAY = 1500
-const PREFERENCE_BASE = 70
-const REINFORCEMENT_FACTOR = 30
-const HIT_RATE_WEIGHT = 0.4
-const WEIGHTED_HIT_RATE_WEIGHT = 0.6
+const PREVIEW_LIMIT = 6
 
 function toPreferenceIds(values: unknown[] | undefined): number[] {
   return (values ?? []).map(Number).filter((id) => !Number.isNaN(id))
 }
 
-function toTasteAxis(
-  ids: number[],
-  kind: "genre" | "tag"
-): RecommendationAxis[] {
-  return ids.map((id) => ({ id, kind }))
+function hasMinimumSelections(genreIds: number[], tagIds: number[]) {
+  return (
+    genreIds.length >= MIN_SELECTABLE_GENRES &&
+    tagIds.length >= MIN_SELECTABLE_TAGS
+  )
 }
 
-const chartConfig = {
-  taste: {
-    label: "Taste",
-    color: "#06B6D4",
-  },
-} satisfies ChartConfig
+function normalizePreviews(
+  recommendations: GetPreviewRecommendationsQuery["previewRecommendations"],
+): NormalizedPreview[] {
+  return recommendations.map((recommendation) => {
+    const genres =
+      recommendation.genres?.map((item) =>
+        getFragmentData(GenreInfoFragmentDoc, item),
+      ) ?? []
+    const tags =
+      recommendation.tags?.map((item) =>
+        getFragmentData(TagInfoFragmentDoc, item),
+      ) ?? []
+
+    return {
+      id: recommendation.id,
+      titleRomaji: recommendation.titleRomaji,
+      titleEnglish: recommendation.titleEnglish,
+      coverUrl: recommendation.coverUrl,
+      matchPercentage: recommendation.matchPercentage,
+      genreIds: genres.map((genre) => genre.id),
+      genreNames: genres.map((genre) => genre.name),
+      tagIds: tags.map((tag) => tag.id),
+      tagNames: tags.map((tag) => tag.name),
+    }
+  })
+}
 
 export const useRecommendationState = () => {
   const [getRecommendations, { data, loading }] = useLazyQuery(
-    GetPreviewRecommendationsDocument
+    GetPreviewRecommendationsDocument,
   )
+  const { data: genreData } = useQuery(GetGenresDocument)
+  const { data: tagData } = useQuery(GetTagsDocument)
   const { watch } = useFormContext<CombinedSchemaInput>()
 
-  const selectedGenres = watch("genrePreferences")
-  const selectedTags = watch("tagPreferences")
-  const genreIds = toPreferenceIds(useDebounce(selectedGenres, DEBOUNCE_DELAY))
-  const tagIds = toPreferenceIds(useDebounce(selectedTags, DEBOUNCE_DELAY))
+  const genreIds = toPreferenceIds(
+    useDebounce(watch("genrePreferences"), DEBOUNCE_DELAY),
+  )
+  const tagIds = toPreferenceIds(
+    useDebounce(watch("tagPreferences"), DEBOUNCE_DELAY),
+  )
+
+  const canFetch = hasMinimumSelections(genreIds, tagIds)
 
   useEffect(() => {
-    if (genreIds.length === 0 && tagIds.length === 0) {
+    if (!canFetch) {
       return
     }
 
@@ -69,73 +91,52 @@ export const useRecommendationState = () => {
         input: {
           genreIds,
           tagIds,
-          limit: 6,
+          limit: PREVIEW_LIMIT,
         },
       },
     })
-  }, [genreIds, tagIds, getRecommendations])
+  }, [canFetch, genreIds, tagIds, getRecommendations])
 
-  const chartData: TasteAxis[] = useMemo(() => {
-    if (!data) {
+  const genreLabels = useMemo(() => {
+    const labels = new Map<number, string>()
+    genreData?.genre.forEach((genre) => {
+      const { id, name } = getFragmentData(GenreInfoFragmentDoc, genre)
+      labels.set(id, name)
+    })
+    return labels
+  }, [genreData])
+
+  const tagLabels = useMemo(() => {
+    const labels = new Map<number, string>()
+    tagData?.tag.forEach((tag) => {
+      const { id, name } = getFragmentData(TagInfoFragmentDoc, tag)
+      labels.set(id, name)
+    })
+    return labels
+  }, [tagData])
+
+  const matrixAxes = useMemo(
+    () => pickMatrixAxes(genreIds, tagIds, genreLabels, tagLabels),
+    [genreIds, tagIds, genreLabels, tagLabels],
+  )
+
+  const previews = useMemo(
+    () => (data ? normalizePreviews(data.previewRecommendations) : []),
+    [data],
+  )
+
+  const chartData: TasteChartPoint[] = useMemo(() => {
+    if (!canFetch || loading || previews.length === 0) {
       return []
     }
 
-    const chartDataSet =
-      genreIds.length === 6
-        ? toTasteAxis(genreIds, "genre")
-        : [
-            ...toTasteAxis(genreIds, "genre"),
-            ...toTasteAxis(
-              tagIds.slice(0, MAX_SELECTABLE_GENRES - genreIds.length),
-              "tag"
-            ),
-          ]
+    return buildTasteChartData(matrixAxes, previews)
+  }, [canFetch, loading, matrixAxes, previews])
 
-    return chartDataSet.map((preferenceSelection) => {
-      let totalMatches = 0
-      let weightedMatches = 0
-      let totalMatchPercentages = 0
-      let label = ""
-
-      data.previewRecommendations.forEach((recommendation) => {
-        let isHit = false
-
-        if (preferenceSelection.kind === "genre") {
-          const genre = recommendation.genres
-            ?.map((item) => getFragmentData(GenreInfoFragmentDoc, item))
-            .find((item) => item.id === preferenceSelection.id)
-          label = genre?.name ?? label
-          isHit = genre !== undefined
-        } else {
-          const tag = recommendation.tags
-            ?.map((item) => getFragmentData(TagInfoFragmentDoc, item))
-            .find((item) => item.id === preferenceSelection.id)
-          label = tag?.name ?? label
-          isHit = tag !== undefined
-        }
-
-        if (isHit) {
-          totalMatches++
-          weightedMatches += recommendation.matchPercentage
-        }
-        totalMatchPercentages += recommendation.matchPercentage
-      })
-
-      const previewCount = data.previewRecommendations.length
-      const hitRate = previewCount > 0 ? totalMatches / previewCount : 0
-      const weightedHitRate =
-        totalMatchPercentages > 0
-          ? weightedMatches / totalMatchPercentages
-          : 0
-      const blendedHitRate =
-        hitRate * HIT_RATE_WEIGHT + weightedHitRate * WEIGHTED_HIT_RATE_WEIGHT
-
-      return {
-        label,
-        value: Math.round(PREFERENCE_BASE + blendedHitRate * REINFORCEMENT_FACTOR),
-      }
-    })
-  }, [data, genreIds, tagIds])
-
-  return { data, loading, chartConfig, chartData }
+  return {
+    previews,
+    loading,
+    chartData,
+    canFetch,
+  }
 }
