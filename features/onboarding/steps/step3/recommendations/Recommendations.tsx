@@ -12,6 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { motion } from "motion/react"
 import { useMemo } from "react"
 import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts"
+import TastePreviewEmptyState from "./empty-state/TastePreviewEmptyState"
 import { useRecommendationState } from "./useRecommendationState"
 
 const chartConfig = {
@@ -22,22 +23,24 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export default function Recommendations() {
-  const { previews, loading, chartData, canFetch } = useRecommendationState()
+  const {
+    previews,
+    loading,
+    chartData,
+    hasMinimumSelections,
+    selectionProgress,
+  } = useRecommendationState()
 
   const chartKey = chartData.map((point) => point.label).join("|")
 
   const recommendationsList = useMemo(() => {
-    if (!canFetch) {
-      return (
-        <p className="pt-6 text-sm text-muted-foreground">
-          Select at least 3 genres and 3 tags to preview your taste matrix.
-        </p>
-      )
+    if (!hasMinimumSelections) {
+      return <TastePreviewEmptyState selectionProgress={selectionProgress} />
     }
 
     if (loading || previews.length === 0) {
       return (
-        <div className="scrollbar-hide flex items-center gap-4 overflow-x-auto pt-6 pb-4">
+        <div className="scrollbar-hide flex items-center gap-4 overflow-x-auto pb-4">
           {Array.from({ length: 6 }).map((_, index) => (
             <Skeleton key={index} className="h-90 w-60 shrink-0 rounded-md" />
           ))}
@@ -46,7 +49,7 @@ export default function Recommendations() {
     }
 
     return (
-      <div className="scrollbar-hide flex items-center gap-4 overflow-x-auto pt-6 pb-4">
+      <div className="scrollbar-hide flex items-center gap-4 overflow-x-auto pb-4">
         {previews.map((preview) => (
           <Card
             key={preview.id}
@@ -77,11 +80,11 @@ export default function Recommendations() {
         ))}
       </div>
     )
-  }, [canFetch, loading, previews])
+  }, [hasMinimumSelections, loading, previews, selectionProgress])
 
   return (
     <div className="pt-4">
-      <h4 className="font-semibold">Projected Recommendations</h4>
+      <h4 className="pb-5 font-semibold">Projected Recommendations</h4>
       {recommendationsList}
       {chartData.length > 0 && (
         <motion.div

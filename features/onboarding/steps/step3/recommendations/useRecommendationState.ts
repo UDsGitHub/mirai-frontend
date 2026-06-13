@@ -38,16 +38,16 @@ function hasMinimumSelections(genreIds: number[], tagIds: number[]) {
 }
 
 function normalizePreviews(
-  recommendations: GetPreviewRecommendationsQuery["previewRecommendations"],
+  recommendations: GetPreviewRecommendationsQuery["previewRecommendations"]
 ): NormalizedPreview[] {
   return recommendations.map((recommendation) => {
     const genres =
       recommendation.genres?.map((item) =>
-        getFragmentData(GenreInfoFragmentDoc, item),
+        getFragmentData(GenreInfoFragmentDoc, item)
       ) ?? []
     const tags =
       recommendation.tags?.map((item) =>
-        getFragmentData(TagInfoFragmentDoc, item),
+        getFragmentData(TagInfoFragmentDoc, item)
       ) ?? []
 
     return {
@@ -66,20 +66,26 @@ function normalizePreviews(
 
 export const useRecommendationState = () => {
   const [getRecommendations, { data, loading }] = useLazyQuery(
-    GetPreviewRecommendationsDocument,
+    GetPreviewRecommendationsDocument
   )
   const { data: genreData } = useQuery(GetGenresDocument)
   const { data: tagData } = useQuery(GetTagsDocument)
   const { watch } = useFormContext<CombinedSchemaInput>()
 
   const genreIds = toPreferenceIds(
-    useDebounce(watch("genrePreferences"), DEBOUNCE_DELAY),
+    useDebounce(watch("genrePreferences"), DEBOUNCE_DELAY)
   )
   const tagIds = toPreferenceIds(
-    useDebounce(watch("tagPreferences"), DEBOUNCE_DELAY),
+    useDebounce(watch("tagPreferences"), DEBOUNCE_DELAY)
   )
+  const liveGenreIds = toPreferenceIds(watch("genrePreferences"))
+  const liveTagIds = toPreferenceIds(watch("tagPreferences"))
 
   const canFetch = hasMinimumSelections(genreIds, tagIds)
+  const hasMinimumSelectionsLive = hasMinimumSelections(
+    liveGenreIds,
+    liveTagIds
+  )
 
   useEffect(() => {
     if (!canFetch) {
@@ -117,12 +123,12 @@ export const useRecommendationState = () => {
 
   const matrixAxes = useMemo(
     () => pickMatrixAxes(genreIds, tagIds, genreLabels, tagLabels),
-    [genreIds, tagIds, genreLabels, tagLabels],
+    [genreIds, tagIds, genreLabels, tagLabels]
   )
 
   const previews = useMemo(
     () => (data ? normalizePreviews(data.previewRecommendations) : []),
-    [data],
+    [data]
   )
 
   const chartData: TasteChartPoint[] = useMemo(() => {
@@ -138,5 +144,12 @@ export const useRecommendationState = () => {
     loading,
     chartData,
     canFetch,
+    hasMinimumSelections: hasMinimumSelectionsLive,
+    selectionProgress: {
+      genreCount: liveGenreIds.length,
+      tagCount: liveTagIds.length,
+      minGenres: MIN_SELECTABLE_GENRES,
+      minTags: MIN_SELECTABLE_TAGS,
+    },
   }
 }

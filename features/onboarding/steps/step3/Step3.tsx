@@ -3,7 +3,7 @@ import { WandSparkles } from "lucide-react"
 import { motion } from "motion/react"
 import GenreSelect from "./GenreSelect"
 import TagSelect from "./TagSelect"
-import Recommendations from "./Recommendations"
+import Recommendations from "./recommendations/Recommendations"
 import { cn } from "@/lib/utils"
 
 const scrollUnderFooterClass = "pb-[92px]"

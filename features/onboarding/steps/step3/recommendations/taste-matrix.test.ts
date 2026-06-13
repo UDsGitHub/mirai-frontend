@@ -8,7 +8,7 @@ import {
 } from "./taste-matrix"
 
 function makePreview(
-  overrides: Partial<NormalizedPreview> = {},
+  overrides: Partial<NormalizedPreview> = {}
 ): NormalizedPreview {
   return {
     id: "preview-1",
@@ -44,7 +44,7 @@ describe("pickMatrixAxes", () => {
       [1, 2, 3, 4, 5, 6],
       [10, 11, 12],
       genreLabels,
-      tagLabels,
+      tagLabels
     )
 
     expect(axes).toHaveLength(6)
@@ -76,7 +76,12 @@ describe("pickMatrixAxes", () => {
   })
 
   it("caps tags when genres and tags exceed six total axes", () => {
-    const axes = pickMatrixAxes([1, 2, 3, 4], [10, 11, 12], genreLabels, tagLabels)
+    const axes = pickMatrixAxes(
+      [1, 2, 3, 4],
+      [10, 11, 12],
+      genreLabels,
+      tagLabels
+    )
 
     expect(axes).toHaveLength(6)
     expect(axes.filter((axis) => axis.kind === "tag")).toHaveLength(2)
