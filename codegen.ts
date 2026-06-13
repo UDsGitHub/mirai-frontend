@@ -11,6 +11,9 @@ const config: CodegenConfig = {
         gqlTagName: "gql",
         nonOptionalTypename: true,
         skipTypeNameForRoot: true,
+        fragmentMasking: {
+          unmaskFunctionName: "getFragmentData",
+        },
       },
     },
   },

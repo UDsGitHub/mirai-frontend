@@ -8,7 +8,7 @@ import {
   GetPreviewRecommendationsDocument,
   TagInfoFragmentDoc,
 } from "@/gql/graphql"
-import { useFragment } from "@/gql"
+import { getFragmentData } from "@/gql"
 import { useDebounce } from "@/hooks"
 import { useLazyQuery } from "@apollo/client/react"
 import { useEffect, useMemo } from "react"
@@ -102,13 +102,13 @@ export const useRecommendationState = () => {
 
         if (preferenceSelection.kind === "genre") {
           const genre = recommendation.genres
-            ?.map((item) => useFragment(GenreInfoFragmentDoc, item))
+            ?.map((item) => getFragmentData(GenreInfoFragmentDoc, item))
             .find((item) => item.id === preferenceSelection.id)
           label = genre?.name ?? label
           isHit = genre !== undefined
         } else {
           const tag = recommendation.tags
-            ?.map((item) => useFragment(TagInfoFragmentDoc, item))
+            ?.map((item) => getFragmentData(TagInfoFragmentDoc, item))
             .find((item) => item.id === preferenceSelection.id)
           label = tag?.name ?? label
           isHit = tag !== undefined

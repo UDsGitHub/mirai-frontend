@@ -9,7 +9,7 @@ import {
 } from "@/components/multistep-form"
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
-import { useFragment } from "@/gql"
+import { getFragmentData } from "@/gql"
 import {
   GetTagsDocument,
   GetTagsQuery,
@@ -22,7 +22,7 @@ import { useFormContext } from "react-hook-form"
 
 const arrangeTagsByCategory = (tags: GetTagsQuery["tag"]) => {
   return tags
-    .map((tag) => useFragment(TagInfoFragmentDoc, tag))
+    .map((tag) => getFragmentData(TagInfoFragmentDoc, tag))
     .reduce(
       (acc, tag) => {
         if (tag.category in acc) {
