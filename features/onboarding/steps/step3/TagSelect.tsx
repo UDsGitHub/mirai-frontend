@@ -18,6 +18,7 @@ import {
 } from "@/gql/graphql"
 import { useQuery } from "@apollo/client/react"
 import { Tags } from "lucide-react"
+import { useMemo } from "react"
 import { useFormContext } from "react-hook-form"
 
 const arrangeTagsByCategory = (tags: GetTagsQuery["tag"]) => {
@@ -37,7 +38,23 @@ const arrangeTagsByCategory = (tags: GetTagsQuery["tag"]) => {
     )
 }
 
-export default function TagSelect() {
+const filterTags = (tags: TagInfoFragment[], searchTerm?: string) => {
+  if (!searchTerm) {
+    return tags
+  }
+
+  return tags.filter(
+    (tag) =>
+      tag.name.toLowerCase().includes(searchTerm?.toLowerCase() ?? "") ||
+      tag.category.toLowerCase().includes(searchTerm?.toLowerCase() ?? "")
+  )
+}
+
+type Props = {
+  searchTerm?: string
+}
+
+export default function TagSelect({ searchTerm }: Props) {
   const { data, loading } = useQuery(GetTagsDocument)
   const { hasAttemptedStep } = useMultiStepForm()
   const {
@@ -48,7 +65,44 @@ export default function TagSelect() {
 
   const selectedTags = watch("tagPreferences", [])
   const selectedValues = selectedTags.map(String)
-  const atMax = selectedValues.length >= MAX_SELECTABLE_TAGS
+
+  const tagsList = useMemo(() => {
+    if (!data || loading) {
+      return null
+    }
+
+    const atMax = selectedValues.length >= MAX_SELECTABLE_TAGS
+    const filteredResult = Object.entries(
+      arrangeTagsByCategory(data.tag)
+    ).filter((entry) => filterTags(entry[1], searchTerm).length > 0)
+
+    if (filteredResult.every((entry) => entry[1].length === 0)) {
+      return (
+        <p className="text-center text-sm text-muted-foreground">
+          No tags found
+        </p>
+      )
+    }
+
+    return filteredResult.map(([category, tags]) => {
+      return (
+        <div key={category} className="py-3">
+          <h4 className="pb-3 text-sm text-muted-foreground uppercase">
+            {category}
+          </h4>
+          <ChipSelect
+            options={filterTags(tags, searchTerm).map((tag) => ({
+              value: tag.id.toString(),
+              label: tag.name,
+            }))}
+            register={register("tagPreferences")}
+            selectedValues={selectedValues}
+            disableUnselected={atMax}
+          />
+        </div>
+      )
+    })
+  }, [data, loading, searchTerm, selectedValues, register])
 
   if (loading || !data) {
     return (
@@ -80,26 +134,7 @@ export default function TagSelect() {
         Fine-tune your taste profile with specific narrative and aesthetic
         themes you enjoy.
       </p>
-      {Object.entries(arrangeTagsByCategory(data.tag)).map(
-        ([category, tags]) => {
-          return (
-            <div key={category} className="py-3">
-              <h4 className="pb-3 text-sm text-muted-foreground uppercase">
-                {category}
-              </h4>
-              <ChipSelect
-                options={tags.map((tag) => ({
-                  value: tag.id.toString(),
-                  label: tag.name,
-                }))}
-                register={register("tagPreferences")}
-                selectedValues={selectedValues}
-                disableUnselected={atMax}
-              />
-            </div>
-          )
-        }
-      )}
+      {tagsList}
       {hasAttemptedStep && errors.tagPreferences && (
         <p className="text-sm text-red-500 dark:text-red-300">
           {errors.tagPreferences.message}

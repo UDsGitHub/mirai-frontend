@@ -1,14 +1,30 @@
 import { Badge } from "@/components/ui/badge"
-import { WandSparkles } from "lucide-react"
+import { Search, WandSparkles } from "lucide-react"
 import { motion } from "motion/react"
 import GenreSelect from "./GenreSelect"
 import TagSelect from "./TagSelect"
-import Recommendations from "./recommendations/Recommendations"
+import RecommendationsPanel from "./recommendations/RecommendationsPanel"
 import { cn } from "@/lib/utils"
+import { useState } from "react"
+import { useDebounce } from "@/hooks/useDebounce"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group"
 
 const scrollUnderFooterClass = "pb-[92px]"
 
 export default function Step3() {
+  const [searchTerm, setSearchTerm] = useState<string>("")
+  const debouncedSearchTerm = useDebounce(searchTerm, 500)
+
+  const handleSearchTermChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSearchTerm(event.target.value)
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, x: 10 }}
@@ -35,8 +51,19 @@ export default function Step3() {
             cinematic taste profile.
           </p>
         </div>
-        <GenreSelect />
-        <TagSelect />
+        <InputGroup>
+          <InputGroupInput
+            id="input-group-search"
+            placeholder="Search genres and tags"
+            value={searchTerm}
+            onChange={handleSearchTermChange}
+          />
+          <InputGroupAddon>
+            <Search className="size-4" />
+          </InputGroupAddon>
+        </InputGroup>
+        <GenreSelect searchTerm={debouncedSearchTerm} />
+        <TagSelect searchTerm={debouncedSearchTerm} />
       </div>
       <div
         className={`min-h-0 flex-[40%] overflow-y-auto p-8 ${scrollUnderFooterClass}`}
@@ -53,7 +80,7 @@ export default function Step3() {
             <span>Adapting to your picks</span>
           </Badge>
         </div>
-        <Recommendations />
+        <RecommendationsPanel />
       </div>
     </motion.div>
   )

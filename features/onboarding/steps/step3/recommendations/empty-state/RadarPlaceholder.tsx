@@ -1,4 +1,3 @@
-import { Radar } from "lucide-react"
 import { motion, MotionValue, useSpring } from "motion/react"
 
 type Props = {

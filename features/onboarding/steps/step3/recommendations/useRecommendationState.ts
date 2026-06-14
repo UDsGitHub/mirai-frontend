@@ -55,6 +55,8 @@ function normalizePreviews(
       titleRomaji: recommendation.titleRomaji,
       titleEnglish: recommendation.titleEnglish,
       coverUrl: recommendation.coverUrl,
+      bannerUrl: recommendation.bannerUrl,
+      synopsis: recommendation.synopsis,
       matchPercentage: recommendation.matchPercentage,
       genreIds: genres.map((genre) => genre.id),
       genreNames: genres.map((genre) => genre.name),

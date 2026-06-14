@@ -25,17 +25,13 @@ export default function TastePreviewEmptyState({
 
   return (
     <motion.div
+      ref={zoneRef}
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, ease: "easeOut" }}
       className="flex flex-col items-center gap-6 rounded-xl border border-dashed border-cyan-500/20 bg-cyan-500/4 px-6 py-8 text-center"
     >
-      <div
-        ref={zoneRef}
-        className="relative flex h-48 w-full items-center justify-center overflow-hidden"
-      >
-        <RadarPlaceholder mousePosition={{ x: mouseX, y: mouseY }} />
-      </div>
+      <RadarPlaceholder mousePosition={{ x: mouseX, y: mouseY }} />
       <div className="space-y-2">
         <h5 className="text-base font-semibold">Map your taste matrix</h5>
         <p className="max-w-xs text-sm text-muted-foreground">

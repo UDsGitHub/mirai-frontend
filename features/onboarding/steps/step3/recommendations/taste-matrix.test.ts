@@ -15,6 +15,8 @@ function makePreview(
     titleEnglish: "Test Anime",
     titleRomaji: "Test",
     coverUrl: null,
+    bannerUrl: null,
+    synopsis: null,
     matchPercentage: 80,
     genreIds: [1],
     genreNames: ["Action"],

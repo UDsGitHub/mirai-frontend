@@ -18,6 +18,8 @@ export type NormalizedPreview = {
   titleEnglish: string | null
   titleRomaji: string
   coverUrl: string | null
+  bannerUrl: string | null
+  synopsis: string | null
   matchPercentage: number
   genreIds: number[]
   genreNames: string[]
