@@ -1,8 +1,4 @@
-import {
-  CombinedSchemaInput,
-  MIN_SELECTABLE_GENRES,
-  MIN_SELECTABLE_TAGS,
-} from "@/components/multistep-form"
+import { CombinedSchemaInput } from "@/components/multistep-form"
 import {
   GenreInfoFragmentDoc,
   GetGenresDocument,
@@ -22,20 +18,10 @@ import {
   pickMatrixAxes,
   TasteChartPoint,
 } from "./taste-matrix"
+import { hasMinimumSelections, toPreferenceIds } from "./utils"
 
 const DEBOUNCE_DELAY = 1500
 const PREVIEW_LIMIT = 6
-
-function toPreferenceIds(values: unknown[] | undefined): number[] {
-  return (values ?? []).map(Number).filter((id) => !Number.isNaN(id))
-}
-
-function hasMinimumSelections(genreIds: number[], tagIds: number[]) {
-  return (
-    genreIds.length >= MIN_SELECTABLE_GENRES &&
-    tagIds.length >= MIN_SELECTABLE_TAGS
-  )
-}
 
 function normalizePreviews(
   recommendations: GetPreviewRecommendationsQuery["previewRecommendations"]
@@ -150,8 +136,6 @@ export const useRecommendationState = () => {
     selectionProgress: {
       genreCount: liveGenreIds.length,
       tagCount: liveTagIds.length,
-      minGenres: MIN_SELECTABLE_GENRES,
-      minTags: MIN_SELECTABLE_TAGS,
     },
   }
 }

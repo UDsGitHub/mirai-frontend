@@ -4,22 +4,20 @@ import { motion } from "motion/react"
 import { useRef } from "react"
 import RadarPlaceholder from "./RadarPlaceholder"
 import ProgressRow from "./ProgressRow"
-
-type SelectionProgress = {
-  genreCount: number
-  tagCount: number
-  minGenres: number
-  minTags: number
-}
+import {
+  MIN_SELECTABLE_GENRES,
+  MIN_SELECTABLE_TAGS,
+} from "@/components/multistep-form"
+import { SelectionProgress } from "../types"
 
 export default function TastePreviewEmptyState({
   selectionProgress,
 }: {
   selectionProgress: SelectionProgress
 }) {
-  const { genreCount, tagCount, minGenres, minTags } = selectionProgress
-  const genresComplete = genreCount >= minGenres
-  const tagsComplete = tagCount >= minTags
+  const { genreCount, tagCount } = selectionProgress
+  const genresComplete = genreCount >= MIN_SELECTABLE_GENRES
+  const tagsComplete = tagCount >= MIN_SELECTABLE_TAGS
   const zoneRef = useRef<HTMLDivElement>(null)
   const { x: mouseX, y: mouseY } = useBoundedCursorFollow(zoneRef)
 
@@ -45,13 +43,13 @@ export default function TastePreviewEmptyState({
           icon={<SquareLibrary className="size-4 text-cyan-400" />}
           label="Core genres"
           count={genreCount}
-          min={minGenres}
+          min={MIN_SELECTABLE_GENRES}
         />
         <ProgressRow
           icon={<Tags className="size-4 text-purple-400" />}
           label="Taste tags"
           count={tagCount}
-          min={minTags}
+          min={MIN_SELECTABLE_TAGS}
         />
       </div>
     </motion.div>

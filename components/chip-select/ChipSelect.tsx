@@ -20,7 +20,7 @@ type Props = {
 }
 
 const chipOptionClass = cn(
-  "relative rounded-lg border border-border px-6 py-2 duration-300",
+  "relative rounded-lg border border-border px-6 py-2 duration-300 bg-background/50 backdrop-blur-xs",
   "hover:scale-105 hover:border-purple-500/30 hover:bg-purple-500/10 hover:text-primary-foreground",
   "active:scale-95 active:border-purple-500 active:bg-purple-500/20 active:text-primary-foreground",
   "[&:has(input:checked)]:scale-105 [&:has(input:checked)]:border-purple-500 [&:has(input:checked)]:bg-purple-500/20 [&:has(input:checked)]:text-primary-foreground",

@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { useIsMobile } from "@/hooks"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
 export const FOOTER_HEIGHT_CLASS = "h-[92px]"
@@ -17,6 +18,7 @@ export default function Footer({
   handleNext,
 }: Props) {
   const isLastStep = currentStepIndex === totalSteps - 1
+  const isMobile = useIsMobile();
 
   return (
     <footer className="pointer-events-none fixed right-0 bottom-0 left-0 z-20 flex h-[92px] bg-linear-to-t from-background from-40% to-transparent">
@@ -25,10 +27,11 @@ export default function Footer({
           variant="outline"
           className="p-5"
           type="button"
+          size={isMobile ? "icon" : "default"}
           onClick={handlePrevious}
         >
           <ArrowLeft className="size-4" />
-          <span>Back</span>
+          {!isMobile && <span>Back</span>}
         </Button>
       </div>
       <div className="pointer-events-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">

@@ -14,7 +14,7 @@ export default function FormLayout({
   handlePrevious,
 }: LayoutComponentProps) {
   return (
-    <div className="flex h-full min-h-0 flex-col">
+    <div className="relative flex h-full min-h-0 flex-col">
       <Header
         currentStepIndex={currentStepIndex}
         currentStep={currentStep}
