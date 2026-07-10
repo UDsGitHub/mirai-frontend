@@ -87,7 +87,7 @@ export default function TagSelect({ searchTerm }: Props) {
     return filteredResult.map(([category, tags]) => {
       return (
         <div key={category} className="py-3">
-          <h4 className="pb-3 text-sm text-muted-foreground uppercase">
+          <h4 className="pb-3 text-sm text-muted-foreground uppercase font-semibold">
             {category}
           </h4>
           <ChipSelect
@@ -130,16 +130,16 @@ export default function TagSelect({ searchTerm }: Props) {
           {selectedValues.length} of {MAX_SELECTABLE_TAGS} selected
         </Badge>
       </div>
+      {hasAttemptedStep && errors.tagPreferences && (
+        <p className="text-sm text-red-500 dark:text-red-400">
+          {errors.tagPreferences.message}
+        </p>
+      )}
       <p className="pt-3 text-sm font-medium text-muted-foreground">
         Fine-tune your taste profile with specific narrative and aesthetic
         themes you enjoy.
       </p>
       {tagsList}
-      {hasAttemptedStep && errors.tagPreferences && (
-        <p className="text-sm text-red-500 dark:text-red-300">
-          {errors.tagPreferences.message}
-        </p>
-      )}
     </div>
   )
 }

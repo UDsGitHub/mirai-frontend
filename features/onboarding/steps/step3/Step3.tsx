@@ -67,14 +67,18 @@ export default function Step3() {
               {isMobile && (
                 <RecommendationsPanelTriggers
                   canTrigger={canTriggerPanel}
+                  selectionProgress={{
+                    genreCount: genreIds.length,
+                    tagCount: tagIds.length,
+                  }}
                   onTriggerChange={handlePanelTriggerChange}
                 />
               )}
               <div
-                className={`px-[6%] ${isMobile ? "py-0" : "py-12"} ${scrollUnderFooterClass} flex flex-col gap-12`}
+                className={`px-[6%] ${isMobile ? "py-0" : "py-12"} ${scrollUnderFooterClass} flex flex-col gap-8`}
               >
                 <div>
-                  <h1 className="pt-3 text-4xl font-bold">
+                  <h1 className="pt-3 text-2xl font-bold font-panchang">
                     Initialize your{" "}
                     <span className="bg-linear-to-r from-cyan-500 to-purple-500 bg-clip-text font-extrabold text-transparent">
                       Neural Core
@@ -85,19 +89,21 @@ export default function Step3() {
                     cinematic taste profile.
                   </p>
                 </div>
-                <InputGroup>
-                  <InputGroupInput
-                    id="input-group-search"
-                    placeholder="Search genres and tags"
-                    value={searchTerm}
-                    onChange={handleSearchTermChange}
-                  />
-                  <InputGroupAddon>
-                    <Search className="size-4" />
-                  </InputGroupAddon>
-                </InputGroup>
-                <GenreSelect searchTerm={debouncedSearchTerm} />
-                <TagSelect searchTerm={debouncedSearchTerm} />
+                <div>
+                  <InputGroup className="mb-6">
+                    <InputGroupInput
+                      id="input-group-search"
+                      placeholder="Search genres and tags"
+                      value={searchTerm}
+                      onChange={handleSearchTermChange}
+                    />
+                    <InputGroupAddon>
+                      <Search className="size-4" />
+                    </InputGroupAddon>
+                  </InputGroup>
+                  <GenreSelect searchTerm={debouncedSearchTerm} />
+                  <TagSelect searchTerm={debouncedSearchTerm} />
+                </div>
               </div>
             </div>
             {!isMobile && (

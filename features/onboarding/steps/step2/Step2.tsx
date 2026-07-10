@@ -26,7 +26,7 @@ export default function Step2() {
         className="flex items-center justify-center p-4 sm:p-0"
       >
         <div className="flex flex-col gap-2">
-          <h1 className="mb-4 text-center text-4xl sm:text-6xl font-bold">
+          <h1 className="sm:mb-4 text-center text-2xl sm:text-6xl font-bold font-panchang">
             When were you born?
           </h1>
           <Controller
@@ -40,7 +40,7 @@ export default function Step2() {
                 onChange={field.onChange}
                 onBlur={field.onBlur}
                 placeholder="Month/Day/Year"
-                className="px-4 py-6 text-center text-xl sm:text-2xl! font-semibold"
+                className="px-4 py-6 text-center text-xl sm:text-2xl! font-semibold placeholder:text-base placeholder:font-light"
                 variant="underline"
                 aria-invalid={fieldState.invalid}
                 autoFocus
@@ -48,7 +48,7 @@ export default function Step2() {
             )}
           />
           {hasAttemptedStep && errors.birthDate && (
-            <p className="text-sm text-red-500 dark:text-red-300">
+            <p className="text-sm text-red-500 dark:text-red-400">
               {errors.birthDate.message}
             </p>
           )}

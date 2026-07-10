@@ -1,16 +1,15 @@
-import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import { cn } from "@/lib/utils"
 import { Metadata } from "next"
 import App from "./app"
 import { CustomClerkProvider } from "@/providers"
-
-const geist = Geist({ subsets: ["latin"], variable: "--font-sans" })
-
-const fontMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-})
+import {
+  fontAdventPro,
+  fontKihim,
+  fontMono,
+  fontPanchang,
+  geist,
+} from "@/lib/fonts"
 
 export const metadata: Metadata = {
   title: "Mirai",
@@ -28,9 +27,13 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn(
         "antialiased",
-        fontMono.variable,
-        "font-sans",
         geist.variable,
+        fontMono.variable,
+        fontPanchang.variable,
+        fontAdventPro.variable,
+        fontKihim.variable,
+        "font-sans",
+        "font-advent-pro",
         "h-full"
       )}
     >

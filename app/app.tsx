@@ -6,6 +6,8 @@ import { ThemeProvider } from "@/components/theme-provider"
 import React, { useMemo } from "react"
 import { createApolloClient } from "@/lib/apollo-client"
 import { ProfileGate } from "@/features/auth"
+import { Toaster } from "@/components/ui/sonner"
+import { UserProfileProvider } from "@/providers"
 
 export default function App({ children }: { children: React.ReactNode }) {
   const { getToken } = useAuth()
@@ -14,7 +16,10 @@ export default function App({ children }: { children: React.ReactNode }) {
   return (
     <ApolloProvider client={client}>
       <ThemeProvider>
-        <ProfileGate>{children}</ProfileGate>
+        <UserProfileProvider>
+          <ProfileGate>{children}</ProfileGate>
+        </UserProfileProvider>
+        <Toaster />
       </ThemeProvider>
     </ApolloProvider>
   )

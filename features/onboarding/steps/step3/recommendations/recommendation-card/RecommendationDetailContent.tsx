@@ -85,11 +85,11 @@ export default function RecommendationDetailContent({
   return (
     <Card className="gap-0 py-0">
       {banner}
-      <CardHeader>
+      <CardHeader className="pt-4">
         {title}
         {description}
       </CardHeader>
-      <CardContent className="no-scrollbar max-h-[50vh] overflow-y-auto">
+      <CardContent className="pt-4 no-scrollbar max-h-[50vh] overflow-y-auto">
         {synopsis}
       </CardContent>
     </Card>

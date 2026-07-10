@@ -28,18 +28,18 @@ export default function Step1() {
         className="flex items-center justify-center p-4 sm:p-0"
       >
         <div className="flex flex-col gap-2">
-        <h1 className="mb-4 cursor-default text-center text-4xl sm:text-6xl font-bold">
+        <h1 className="sm:mb-4 cursor-default text-center text-2xl sm:text-6xl font-bold font-panchang">
           What should we call you?
         </h1>
         <Input
           {...register("displayName")}
           placeholder="Enter your display name"
-          className="px-4 py-6 text-center text-xl sm:text-2xl! font-semibold"
+          className="px-4 py-6 text-center text-xl sm:text-2xl! font-semibold placeholder:text-base placeholder:sm:text-xl placeholder:font-light"
           variant={"underline"}
           autoFocus
         />
         {hasAttemptedStep && errors.displayName && (
-          <p className="text-sm text-red-500 dark:text-red-300">
+          <p className="text-sm text-center text-red-500 dark:text-red-400">
             {errors.displayName.message}
           </p>
         )}

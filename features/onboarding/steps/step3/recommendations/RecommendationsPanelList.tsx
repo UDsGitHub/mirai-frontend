@@ -3,6 +3,7 @@ import TastePreviewEmptyState from "./empty-state/TastePreviewEmptyState"
 import RecommendationCard from "./recommendation-card/RecommendationCard"
 import { NormalizedPreview } from "./taste-matrix"
 import { SelectionProgress } from "./types"
+import { useScrollContainer } from "react-indiana-drag-scroll"
 
 const listClassName =
   "scrollbar-hide flex min-w-0 items-center gap-4 overflow-x-auto pb-4"
@@ -22,13 +23,11 @@ export default function RecommendationsPanelList({
   selectionProgress,
   hasMinimumSelections,
 }: Props) {
-  if (!hasMinimumSelections) {
-    return <TastePreviewEmptyState selectionProgress={selectionProgress} />
-  }
+  const scrollContainer = useScrollContainer()
 
-  if (loading || previews.length === 0) {
+  if (loading) {
     return (
-      <div className={listClassName}>
+      <div className={listClassName} ref={scrollContainer.ref}>
         {Array.from({ length: 6 }).map((_, index) => (
           <Skeleton
             key={index}
@@ -39,8 +38,12 @@ export default function RecommendationsPanelList({
     )
   }
 
+  if (!hasMinimumSelections || previews.length === 0) {
+    return <TastePreviewEmptyState selectionProgress={selectionProgress} />
+  }
+
   return (
-    <div className={listClassName}>
+    <div className={listClassName} ref={scrollContainer.ref}>
       {previews.map((preview) => (
         <RecommendationCard
           key={preview.id}

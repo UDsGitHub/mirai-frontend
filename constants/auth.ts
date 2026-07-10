@@ -1,0 +1,1 @@
+export const SKIP_PROFILE_GATE_ROUTES = ["/sign-in"]

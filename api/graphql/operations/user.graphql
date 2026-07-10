@@ -4,8 +4,49 @@ query GetUser($id: String!) {
     displayName
     avatarUrl
     birthDate
-    genrePreferences
-    tagPreferences
+    genrePreferences {
+      genreId
+      weight
+    }
+    tagPreferences {
+      tagId
+      weight
+    }
+    bio
+    createdAt
+  }
+}
+
+mutation CreateUser($input: CreateUserInput!) {
+  createUser(createUserInput: $input) {
+    userId
+    displayName
+    avatarUrl
+    birthDate
+    genrePreferences {
+      genreId
+      weight
+    }
+    tagPreferences {
+      tagId
+      weight
+    }
+    bio
+    createdAt
+  }
+}
+mutation UpdateUser($input: UpdateUserInput!) {
+  updateUser(updateUserInput: $input) {
+    userId
+    displayName
+    avatarUrl
+    birthDate
+    genrePreferences {
+      genreId
+    }
+    tagPreferences {
+      tagId
+    }
     bio
     createdAt
   }

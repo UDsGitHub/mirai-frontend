@@ -1,1 +1,2 @@
-export { default as CustomClerkProvider } from "./clerk/CustomClerkProvider"
+export * from "./clerk"
+export * from "./user-profile"

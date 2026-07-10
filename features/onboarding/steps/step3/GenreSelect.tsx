@@ -103,12 +103,12 @@ export default function GenreSelect({ searchTerm }: Props) {
           {selectedValues.length} of {MAX_SELECTABLE_GENRES} selected
         </Badge>
       </div>
-      <div className="pt-3">{filteredGenres}</div>
       {hasAttemptedStep && errors.genrePreferences && (
-        <p className="text-sm text-red-500 dark:text-red-300">
+        <p className="text-sm text-red-500 dark:text-red-400">
           {errors.genrePreferences.message}
         </p>
       )}
+      <div className="pt-3">{filteredGenres}</div>
     </div>
   )
 }

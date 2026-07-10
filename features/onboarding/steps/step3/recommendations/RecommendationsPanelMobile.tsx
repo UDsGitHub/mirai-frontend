@@ -38,7 +38,7 @@ export default function RecommendationsPanelMobile({ trigger }: Props) {
             <DrawerTitle>Taste Preview</DrawerTitle>
             <DrawerDescription>
               <Badge variant={"secondary"}>
-                <div className="h-1 w-1 animate-pulse rounded-full bg-cyan-300" />
+                <span className="inline-block h-1 w-1 animate-pulse rounded-full bg-cyan-300" />
                 <span>Adapting to your picks</span>
               </Badge>
             </DrawerDescription>

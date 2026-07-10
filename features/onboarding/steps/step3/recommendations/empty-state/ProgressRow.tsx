@@ -14,7 +14,7 @@ export default function ProgressRow({ icon, label, count, min }: Props) {
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between text-sm">
-        <div className="flex items-center gap-2 text-muted-foreground">
+        <div className="flex items-center gap-2 font-semibold">
           {icon}
           <span>{label}</span>
         </div>
