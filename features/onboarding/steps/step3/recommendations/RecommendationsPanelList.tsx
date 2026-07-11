@@ -23,11 +23,11 @@ export default function RecommendationsPanelList({
   selectionProgress,
   hasMinimumSelections,
 }: Props) {
-  const scrollContainer = useScrollContainer()
+  const { ref: scrollRef } = useScrollContainer()
 
   if (loading) {
     return (
-      <div className={listClassName} ref={scrollContainer.ref}>
+      <div className={listClassName} ref={scrollRef}>
         {Array.from({ length: 6 }).map((_, index) => (
           <Skeleton
             key={index}
@@ -43,7 +43,7 @@ export default function RecommendationsPanelList({
   }
 
   return (
-    <div className={listClassName} ref={scrollContainer.ref}>
+    <div className={listClassName} ref={scrollRef}>
       {previews.map((preview) => (
         <RecommendationCard
           key={preview.id}

@@ -12,8 +12,6 @@ type Props = {
   children: React.ReactNode
 }
 
-const now = Date.now()
-
 export default function ProfileGate({ children }: Props) {
   const { isLoaded, isSignedIn, userId } = useAuth()
   const pathname = usePathname()
@@ -26,8 +24,16 @@ export default function ProfileGate({ children }: Props) {
 
   const { userProfile, isLoading } = useUserProfileContext()
 
-  const [showPageLoader, setShowPageLoader] = useState(true)
-  const loaderShownAtRef = useRef<number | null>(now)
+  const loaderStartRef = useRef(0)
+  const [minDelayActive, setMinDelayActive] = useState(false)
+  const [prevIsLoading, setPrevIsLoading] = useState(isLoading)
+
+  if (isLoading !== prevIsLoading) {
+    setPrevIsLoading(isLoading)
+    if (isLoading) {
+      setMinDelayActive(true)
+    }
+  }
 
   useEffect(() => {
     if (skip || isLoading) return
@@ -38,29 +44,31 @@ export default function ProfileGate({ children }: Props) {
   }, [skip, isLoading, userProfile, router])
 
   useEffect(() => {
+    if (skip) {
+      loaderStartRef.current = 0
+      return
+    }
+
     if (isLoading) {
-      if (loaderShownAtRef.current === null) {
-        loaderShownAtRef.current = Date.now()
+      if (loaderStartRef.current === 0) {
+        loaderStartRef.current = Date.now()
       }
-      setShowPageLoader(true)
       return
     }
 
-    if (loaderShownAtRef.current === null) {
-      setShowPageLoader(false)
-      return
-    }
+    if (!minDelayActive || loaderStartRef.current === 0) return
 
-    const elapsed = Date.now() - loaderShownAtRef.current
-    const remaining = Math.max(0, MIN_LOADER_MS - elapsed)
-
-    const timeout = setTimeout(() => {
-      loaderShownAtRef.current = null
-      setShowPageLoader(false)
-    }, remaining)
+    const remaining = Math.max(
+      0,
+      MIN_LOADER_MS - (Date.now() - loaderStartRef.current)
+    )
+    const timeout = setTimeout(() => setMinDelayActive(false), remaining)
 
     return () => clearTimeout(timeout)
-  }, [isLoading])
+  }, [skip, isLoading, minDelayActive])
+
+  const showPageLoader =
+    !isLoaded || (!skip && (isLoading || minDelayActive))
 
   return showPageLoader ? <PageLoader /> : <>{children}</>
 }
