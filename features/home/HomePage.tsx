@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@clerk/nextjs"
 
-export default function Page() {
+export default function HomePage() {
   const { signOut } = useAuth()
 
   return (
