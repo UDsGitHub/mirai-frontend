@@ -1,5 +1,5 @@
-import { Sidebar, SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
-import AppSidebar from "@/features/home/sidebar/AppSidebar"
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
+import {AppHeader, AppSidebar} from "@/features/home"
 import React from "react"
 
 type Props = {
@@ -10,7 +10,10 @@ export default function HomeLayout({ children }: Props) {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset>{children}</SidebarInset>
+      <SidebarInset>
+        <AppHeader />
+        {children}
+      </SidebarInset>
     </SidebarProvider>
   )
 }

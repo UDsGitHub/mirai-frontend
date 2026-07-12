@@ -1,7 +1,3 @@
-import React from "react"
-
-type Props = {}
-
-export default function AskMiraiPage({}: Props) {
+export default function AskMiraiPage() {
   return <div>AskMiraiPage</div>
 }

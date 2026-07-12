@@ -10,7 +10,6 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { SidebarItem } from "./types"
 import {
   Bookmark,
   Bot,
@@ -23,8 +22,13 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { type LucideIcon } from "lucide-react"
 
-type Props = {}
+export type SidebarItem = {
+  label: string
+  href: string
+  icon: LucideIcon
+}
 
 const navItems: SidebarItem[] = [
   {
@@ -54,8 +58,8 @@ const navItems: SidebarItem[] = [
   },
 ]
 
-export default function AppSidebar({}: Props) {
-  const { toggleSidebar, open } = useSidebar()
+export default function AppSidebar() {
+  const { open } = useSidebar()
 
   return (
     <TooltipProvider>
@@ -67,16 +71,16 @@ export default function AppSidebar({}: Props) {
           <SidebarMenu>
             <SidebarMenuItem>
               {open ? (
-                <a
+                <Link
                   href="/"
                   className="flex items-center justify-center font-kihim text-2xl font-medium tracking-wider"
                 >
                   MIRAI
-                </a>
+                </Link>
               ) : (
-                <a href="/" className="flex items-center justify-center">
+                <Link href="/" className="flex items-center justify-center">
                   <Eye className="size-5!" />
-                </a>
+                </Link>
               )}
             </SidebarMenuItem>
           </SidebarMenu>
@@ -104,17 +108,6 @@ export default function AppSidebar({}: Props) {
             ))}
           </SidebarMenu>
         </SidebarContent>
-        <SidebarFooter>
-          <SidebarMenu className="py-4 group-data-[state=expanded]:p-4">
-            <SidebarMenuItem className="group-data-[state=collapsed]:mx-auto group-data-[state=expanded]:ml-auto">
-              <SidebarMenuButton asChild onClick={toggleSidebar}>
-                <div className="flex items-center justify-end">
-                  {open ? <ChevronsLeft /> : <ChevronsRight />}
-                </div>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarFooter>
       </Sidebar>
     </TooltipProvider>
   )

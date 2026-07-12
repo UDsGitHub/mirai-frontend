@@ -1,8 +1,4 @@
-import React from 'react'
-
-type Props = {}
-
-export default function WatchlistPage({}: Props) {
+export default function WatchlistPage() {
   return (
     <div>WatchlistPage</div>
   )

@@ -1,8 +1,4 @@
-import React from 'react'
-
-type Props = {}
-
-export default function SocialPage({}: Props) {
+  export default function SocialPage() {
   return (
     <div>SocialPage</div>
   )

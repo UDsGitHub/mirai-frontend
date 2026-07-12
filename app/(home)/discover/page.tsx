@@ -1,8 +1,4 @@
-import React from 'react'
-
-type Props = {}
-
-export default function DiscoverPage({}: Props) {
+export default function DiscoverPage() {
   return (
     <div>DiscoverPage</div>
   )

@@ -1,1 +1,2 @@
-export { default as AppSidebar } from "./sidebar/AppSidebar"
+export { default as AppSidebar } from "./AppSidebar"
+export { default as AppHeader } from "./AppHeader"
