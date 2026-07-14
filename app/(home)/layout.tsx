@@ -8,9 +8,13 @@ type Props = {
 
 export default function HomeLayout({ children }: Props) {
   return (
-    <SidebarProvider>
+    <SidebarProvider
+      style={
+        { "--sidebar-width-icon": "4rem" } as React.CSSProperties
+      }
+    >
       <AppSidebar />
-      <SidebarInset>
+      <SidebarInset className="min-w-0">
         <AppHeader />
         {children}
       </SidebarInset>

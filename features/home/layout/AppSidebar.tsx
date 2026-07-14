@@ -3,7 +3,6 @@
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -16,8 +15,6 @@ import {
   Compass,
   HomeIcon,
   MessageCircleHeart,
-  ChevronsLeft,
-  ChevronsRight,
   Eye,
 } from "lucide-react"
 import Link from "next/link"
@@ -63,22 +60,19 @@ export default function AppSidebar() {
 
   return (
     <TooltipProvider>
-      <Sidebar
-        collapsible="icon"
-        className="group-data-[collapsible=icon]:w-16"
-      >
+      <Sidebar collapsible="icon">
         <SidebarHeader className="pt-4 pb-2">
           <SidebarMenu>
             <SidebarMenuItem>
               {open ? (
                 <Link
                   href="/"
-                  className="flex items-center justify-center font-kihim text-2xl font-medium tracking-wider"
+                  className="flex items-center justify-center font-kihim text-2xl font-medium tracking-wider text-foreground"
                 >
                   MIRAI
                 </Link>
               ) : (
-                <Link href="/" className="flex items-center justify-center">
+                <Link href="/" className="flex items-center justify-center text-foreground">
                   <Eye className="size-5!" />
                 </Link>
               )}
@@ -99,7 +93,7 @@ export default function AppSidebar() {
                 >
                   <Link href={item.href} className="px-4 py-6">
                     <item.icon className="size-5!" />
-                    <span className="text-base font-semibold">
+                    <span className="font-medium">
                       {item.label}
                     </span>
                   </Link>

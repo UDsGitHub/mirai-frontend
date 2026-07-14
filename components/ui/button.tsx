@@ -5,12 +5,12 @@ import { Slot } from "radix-ui"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 cursor-pointer",
   {
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/80",
-        primary: `border-none bg-linear-to-r from-cyan-500 to-purple-500 text-sm font-semibold text-white duration-300 before:absolute before:-inset-1 before:top-2 before:-z-10 before:rounded-lg before:bg-cyan-500 before:opacity-25 before:blur-xs before:transition-all before:duration-300 before:content-[''] hover:-translate-y-0.5 hover:before:opacity-35 hover:before:blur-sm focus:-translate-y-0.5`,
+        primary: `border-none bg-teal-200 text-sm font-semibold text-accent duration-300 before:absolute before:-inset-1 before:top-2 before:-z-10 before:rounded-lg before:bg-cyan-500 before:opacity-25 before:blur-xs before:transition-all before:duration-300 before:content-[''] hover:-translate-y-0.5 hover:before:opacity-35 hover:before:blur-sm focus:-translate-y-0.5`,
         outline:
           "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
         secondary:

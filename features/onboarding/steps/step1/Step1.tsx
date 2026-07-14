@@ -28,7 +28,7 @@ export default function Step1() {
         className="flex items-center justify-center p-4 sm:p-0"
       >
         <div className="flex flex-col gap-2">
-        <h1 className="sm:mb-4 cursor-default text-center text-2xl sm:text-6xl font-bold font-panchang">
+        <h1 className="sm:mb-4 cursor-default text-center text-2xl sm:text-6xl font-bold font-zalando">
           What should we call you?
         </h1>
         <Input

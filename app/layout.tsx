@@ -8,6 +8,8 @@ import {
   fontKihim,
   fontMono,
   fontPanchang,
+  fontZalando,
+  fontMontserrat,
   geist,
 } from "@/lib/fonts"
 
@@ -32,8 +34,10 @@ export default function RootLayout({
         fontPanchang.variable,
         fontAdventPro.variable,
         fontKihim.variable,
+        fontZalando.variable,
+        fontMontserrat.variable,
         "font-sans",
-        "font-advent-pro",
+        "font-montserrat leading-relaxed",
         "h-full"
       )}
     >

@@ -11,6 +11,8 @@
     --font-panchang: var(--font-panchang-family);
     --font-advent-pro: var(--font-advent-pro-family);
     --font-kihim: var(--font-kihim-family);
+    --font-zalando: var(--font-zalando-family);
+    --font-montserrat: var(--font-montserrat-family);
     --font-inter: "Inter", sans-serif;
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);

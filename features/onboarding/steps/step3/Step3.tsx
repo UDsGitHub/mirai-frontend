@@ -78,7 +78,7 @@ export default function Step3() {
                 className={`px-[6%] ${isMobile ? "py-0" : "py-12"} ${scrollUnderFooterClass} flex flex-col gap-8`}
               >
                 <div>
-                  <h1 className="pt-3 text-2xl font-bold font-panchang">
+                  <h1 className="pt-3 text-2xl font-bold font-zalando">
                     Initialize your{" "}
                     <span className="bg-linear-to-r from-cyan-500 to-purple-500 bg-clip-text font-extrabold text-transparent">
                       Neural Core
