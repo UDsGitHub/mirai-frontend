@@ -93,7 +93,7 @@ export default function FeaturedPickCard() {
           </Button>
           <div className="flex items-center gap-1">
             <Star className="size-4 fill-yellow-300 stroke-none" />
-            <span className="flex items-center text-sm">9.4 / 10</span>
+            <span className="flex items-center text-sm font-bold">9.4</span>
           </div>
         </div>
       </div>

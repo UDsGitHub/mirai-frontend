@@ -1,21 +1,46 @@
 import { Button } from "@/components/ui/button"
-import { WatchlistSuggestionType } from "./types"
-import { Eye, Plus } from "lucide-react"
+import { AnimePreviewCardType } from "./types"
+import { Eye, Plus, Star, TrendingUp } from "lucide-react"
 import Image from "next/image"
+import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
+import { BACKGROUND_COLORS } from "@/constants/style"
+import { MAX_PREVIEW_TAGS } from "./constants"
 
 type Props = {
-  previewInfo: WatchlistSuggestionType
+  previewInfo: AnimePreviewCardType
 }
 
-export default function WatchlistSuggestionCard({ previewInfo }: Props) {
+export default function PreviewAnimeCard({ previewInfo }: Props) {
+  const rankingBackgroundColor = previewInfo.ranking
+    ? BACKGROUND_COLORS[(previewInfo.ranking - 1) % BACKGROUND_COLORS.length]
+    : ""
+
   return (
     <div className="group flex w-[200px] shrink-0 flex-col gap-3 duration-500 ease-in-out hover:-translate-y-0.5">
       <div className="relative h-[280px] w-full cursor-pointer overflow-hidden rounded-md">
         <Image
           src={previewInfo.coverImage}
           alt={previewInfo.title}
+          fill
           className="h-full w-full object-cover duration-500 ease-in-out group-hover:scale-105"
         />
+        <div className="absolute top-1 flex w-full items-center justify-between px-1">
+          <Badge className="bg-black/50">
+            <Star className="size-4 fill-yellow-300 stroke-none" />
+            <span className="text-xs font-bold text-accent-foreground">
+              {previewInfo.rating}
+            </span>
+          </Badge>
+          {previewInfo.ranking && (
+            <Badge className={rankingBackgroundColor}>
+              <TrendingUp />
+              <span className={"text-xs font-bold"}>
+                #{previewInfo.ranking}
+              </span>
+            </Badge>
+          )}
+        </div>
         <div className="absolute inset-0 bg-transparent duration-500 group-hover:bg-black/40" />
         <div className="absolute top-1/2 left-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-2 group-hover:flex">
           <Button
@@ -34,7 +59,7 @@ export default function WatchlistSuggestionCard({ previewInfo }: Props) {
           {previewInfo.title}
         </span>
         <span className="truncate text-xs font-medium text-muted-foreground">
-          {previewInfo.tags.join(" ⋅ ")}
+          {previewInfo.tags.slice(0, MAX_PREVIEW_TAGS).join(" ⋅ ")}
         </span>
       </div>
     </div>

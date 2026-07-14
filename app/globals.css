@@ -8,7 +8,6 @@
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: var(--font-sans);
-    --font-panchang: var(--font-panchang-family);
     --font-advent-pro: var(--font-advent-pro-family);
     --font-kihim: var(--font-kihim-family);
     --font-zalando: var(--font-zalando-family);

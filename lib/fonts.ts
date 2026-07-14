@@ -8,13 +8,6 @@ export const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
-export const fontPanchang = localFont({
-  src: "../public/assets/fonts/panchang/Panchang-Variable.woff2",
-  variable: "--font-panchang-family",
-  display: "swap",
-  weight: "100 200 300 400 500 600 700 800 900",
-})
-
 export const fontAdventPro = localFont({
   src: "../public/assets/fonts/adventpro/AdventPro-VariableFont_wdth,wght.ttf",
   variable: "--font-advent-pro-family",

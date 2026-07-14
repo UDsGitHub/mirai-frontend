@@ -1,0 +1,1 @@
+export const MAX_PREVIEW_TAGS = 3
