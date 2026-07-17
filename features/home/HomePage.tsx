@@ -282,8 +282,8 @@ export default function HomePage() {
   const { signOut } = useAuth()
 
   return (
-    <div className="min-h-svh p-4 sm:p-8">
-      <div className="flex flex-col gap-12">
+    <div className="mx-auto min-h-svh w-full max-w-[1920px] p-4 sm:p-8 3xl:px-12">
+      <div className="flex flex-col gap-12 3xl:gap-16">
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -310,7 +310,7 @@ export default function HomePage() {
           sectionTitle={
             <div className="flex items-center gap-2">
               <Play strokeWidth={3} className="stroke-blue-500" />
-              <span className="text-base font-bold sm:text-base 2xl:text-xl font-zalando">
+              <span className="font-zalando text-base font-bold 3xl:text-xl">
                 Continue Building Your Watchlist
               </span>
             </div>
@@ -322,7 +322,7 @@ export default function HomePage() {
           sectionTitle={
             <div className="flex items-center gap-2">
               <Flame strokeWidth={3} className="stroke-rose-500" />
-              <span className="text-base font-bold sm:text-base 2xl:text-xl font-zalando">
+              <span className="font-zalando text-base font-bold 3xl:text-xl">
                 Trending This Season
               </span>
             </div>
@@ -336,7 +336,7 @@ export default function HomePage() {
           sectionTitle={
             <div className="flex items-center gap-2">
               <WandSparkles strokeWidth={3} className="stroke-teal-500" />
-              <span className="text-base font-bold sm:text-base 2xl:text-xl font-zalando">
+              <span className="font-zalando text-base font-bold 3xl:text-xl">
                 Because You Loved
               </span>
               <Badge
@@ -359,7 +359,7 @@ export default function HomePage() {
           sectionTitle={
             <div className="flex items-center gap-2">
               <VenetianMask strokeWidth={3} className="stroke-teal-500" />
-              <span className="text-base font-bold sm:text-base 2xl:text-xl font-zalando">
+              <span className="font-zalando text-base font-bold 3xl:text-xl">
                 Hidden Gems
               </span>
             </div>

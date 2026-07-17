@@ -34,8 +34,8 @@ export default function PreviewAnimeSection({
       <div
         className={
           useGrid
-            ? "grid grid-cols-2 grid-rows-2 gap-4 pt-2"
-            : "no-scrollbar flex w-full items-center gap-4 overflow-x-auto pt-2"
+            ? "grid grid-cols-2 grid-rows-2 gap-4 pt-2 3xl:gap-6"
+            : "no-scrollbar flex w-full items-center gap-4 overflow-x-auto pt-2 3xl:gap-6"
         }
         ref={scrollRef}
       >

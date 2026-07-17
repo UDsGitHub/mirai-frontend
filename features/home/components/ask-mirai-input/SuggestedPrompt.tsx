@@ -10,7 +10,7 @@ export default function SuggestedPrompt({ value, onClick }: Props) {
     <Button
       variant={"outline"}
       onClick={onClick}
-      className="rounded-2xl bg-transparent font-semibold text-xs 2xl:text-base"
+      className="rounded-2xl bg-transparent text-xs font-semibold"
     >
       &quot;{value}&quot;
     </Button>

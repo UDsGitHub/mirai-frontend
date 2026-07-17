@@ -52,6 +52,7 @@
     --radius-3xl: calc(var(--radius) * 2.2);
     --radius-4xl: calc(var(--radius) * 2.6);
     --animate-radar-ping: radar-ping 2s linear infinite;
+    --breakpoint-3xl: 120rem;
 }
 
 :root {

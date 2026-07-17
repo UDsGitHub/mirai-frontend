@@ -21,12 +21,12 @@ export default function AskMiraiInput() {
         className="pointer-events-none absolute inset-0 z-0 rounded-xl ring-1 ring-teal-200/50 ring-inset"
       />
       <div className="relative z-10 flex items-center">
-        <div className="flex size-8 items-center justify-center rounded-xl bg-teal-200 sm:size-10 2xl:size-14">
-          <Bot className="text-accent size-5 2xl:size-7" />
+        <div className="flex size-8 items-center justify-center rounded-xl bg-teal-200 sm:size-10">
+          <Bot className="size-5 text-accent" />
         </div>
         <Textarea
           id="prompt-input"
-          className="field-sizing-content flex-1 resize-none border-none! bg-transparent! text-sm ring-0! outline-none! sm:text-base 2xl:text-lg 2xl:px-3.5"
+          className="field-sizing-content flex-1 resize-none border-none! bg-transparent! text-sm ring-0! outline-none! sm:text-base"
           placeholder={
             isMobile
               ? "What should I watch next?..."
@@ -40,7 +40,7 @@ export default function AskMiraiInput() {
         ) : (
           <Button
             variant={"primary"}
-            className={"rounded-xl px-6 py-5 2xl:px-8 2xl:py-7 font-semibold 2xl:text-xl"}
+            className="rounded-xl px-6 py-5 font-semibold"
           >
             <WandSparkles />
             <span>Ask Mirai</span>
@@ -48,8 +48,9 @@ export default function AskMiraiInput() {
         )}
       </div>
       {!isMobile && (
-        <div className="relative z-10 flex flex-wrap items-center gap-2 2xl:gap-3 text-xs 2xl:text-base text-muted-foreground">
+        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
           <span>Try: </span>
+          <div className="flex flex-wrap items-center gap-2">
           {examplePrompts.map((prompt) => (
             <SuggestedPrompt
               key={prompt}
@@ -57,6 +58,7 @@ export default function AskMiraiInput() {
               onClick={() => console.log(prompt)}
             />
           ))}
+        </div>
         </div>
       )}
     </form>

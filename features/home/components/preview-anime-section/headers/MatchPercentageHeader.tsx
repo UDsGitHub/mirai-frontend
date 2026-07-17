@@ -8,7 +8,7 @@ type Props = {
 
 export default function MatchPecentageHeader({ matchPercentage, rating }: Props) {
   return (
-    <div className="absolute top-1 flex w-full items-center justify-between px-1">
+    <div className="absolute top-2 flex w-full items-center justify-between px-2">
       <Badge
         variant={"outline"}
         className={"border-teal-200 bg-black text-teal-200"}

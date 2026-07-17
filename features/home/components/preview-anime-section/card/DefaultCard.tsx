@@ -21,7 +21,7 @@ export default function DefaultCard({
   const title = previewInfo.titleEnglish
 
   return (
-    <div className="group relative cursor-pointer flex w-[200px] 2xl:w-[300px] shrink-0 flex-col gap-3 rounded-md duration-500 ease-in-out hover:-translate-y-1 has-focus-visible:-translate-y-0.5">
+    <div className="group relative flex w-[200px] shrink-0 cursor-pointer flex-col gap-3 rounded-md duration-500 ease-in-out hover:-translate-y-1 has-focus-visible:-translate-y-0.5 3xl:w-[300px]">
       <button
         type="button"
         aria-label={title}
@@ -29,7 +29,7 @@ export default function DefaultCard({
       />
 
       <motion.div
-        className="relative h-[280px] 2xl:h-[420px] w-full overflow-hidden rounded-md backface-hidden transform-3d"
+        className="relative h-[280px] w-full overflow-hidden rounded-md backface-hidden transform-3d 3xl:h-[420px]"
         initial={{ opacity: 0, rotateY: 60 }}
         whileInView={{ opacity: 1, rotateY: 0 }}
         viewport={{ once: true, amount: 0.1 }}
@@ -62,10 +62,10 @@ export default function DefaultCard({
         </div>
       </motion.div>
       <div className="relative flex flex-col gap-0.5 text-left">
-        <span className="text-sm 2xl:text-xl font-bold duration-300 group-hover:text-teal-200">
+        <span className="text-sm font-bold duration-300 group-hover:text-teal-200 3xl:text-base">
           {title}
         </span>
-        <span className="truncate text-xs 2xl:text-base font-medium text-muted-foreground">
+        <span className="truncate text-xs font-medium text-muted-foreground 3xl:text-sm">
           {previewInfo.tagNames?.slice(0, MAX_PREVIEW_TAGS).join(" ⋅ ")}
         </span>
       </div>

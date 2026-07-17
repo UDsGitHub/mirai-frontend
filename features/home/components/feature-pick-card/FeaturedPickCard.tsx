@@ -20,20 +20,20 @@ export default function FeaturedPickCard() {
   return (
     <div
       className={cn(
-        "relative flex justify-between rounded-xl bg-cover bg-center p-3 duration-300 sm:h-[464px] 2xl:h-[540px] lg:p-6",
+        "relative flex justify-between rounded-xl bg-cover bg-center p-3 duration-300 sm:h-[464px] lg:p-6 3xl:h-[484px]",
         isMobile
           ? "bg-[radial-gradient(circle_at_bottom_right,transparent_0%,black_70%),url('https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_d02a861b8b_60d5ad0ee5f847c1.png')]"
           : "bg-[radial-gradient(circle_at_top_right,transparent_0%,black_80%),url('https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_d02a861b8b_60d5ad0ee5f847c1.png')]"
       )}
     >
-      <div className="flex flex-col items-start gap-4 2xl:gap-6">
-        <div className="flex flex-col gap-2 2xl:gap-3">
+      <div className="flex flex-col items-start gap-4 3xl:gap-6">
+        <div className="flex flex-col gap-2 3xl:gap-3">
           <Badge
             variant={"outline"}
-            className="border border-teal-200/50 p-3 2xl:p-4.5 font-semibold text-teal-200"
+            className="border border-teal-200/50 p-3 font-semibold text-teal-200"
           >
-            <Star className="size-4 2xl:size-6 fill-teal-200" />
-            <span className="ml-0.5 2xl:text-lg">Featured Pick for You Today</span>
+            <Star className="size-4 fill-teal-200" />
+            <span className="ml-0.5">Featured Pick for You Today</span>
           </Badge>
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
             <div className="flex flex-row items-center gap-2">
@@ -44,7 +44,7 @@ export default function FeaturedPickCard() {
                   ],
                   RANDOM_COLORS.text[index % RANDOM_COLORS.text.length],
                   RANDOM_COLORS.border[index % RANDOM_COLORS.border.length],
-                  'text-xs 2xl:text-base 2xl:px-3 2xl:py-1.5'
+                  "text-xs"
                 )
 
                 return (
@@ -54,7 +54,7 @@ export default function FeaturedPickCard() {
                 )
               })}
             </div>
-            <Badge variant={"outline"} className="2xl:text-base">2023 ⋅ 23 ep</Badge>
+            <Badge variant={"outline"}>2023 ⋅ 23 ep</Badge>
           </div>
         </div>
         <h1 className="line-clamp-2 max-w-3/4 shrink-0 font-zalando text-[1.25rem] leading-[1.45] font-bold sm:max-w-lg sm:text-[2.25rem] sm:leading-[1.45]">
@@ -73,10 +73,10 @@ export default function FeaturedPickCard() {
           </Button>
         ) : (
           <div className="flex max-w-[520px] gap-3 rounded-xl border border-teal-200/25 bg-background/50 p-4">
-            <div className="flex size-7 2xl:size-10 shrink-0 items-center justify-center rounded-md bg-teal-200">
-              <Bot className="text-accent size-4 2xl:size-6" />
+            <div className="flex size-7 shrink-0 items-center justify-center rounded-md bg-teal-200">
+              <Bot className="size-4 text-accent" />
             </div>
-            <span className="line-clamp text-sm 2xl:text-base text-muted-foreground">
+            <span className="line-clamp text-sm text-muted-foreground">
               <span className="font-semibold text-foreground">
                 Why Mirai picked this for you today:
               </span>{" "}
@@ -94,35 +94,35 @@ export default function FeaturedPickCard() {
           <Button
             variant={"primary"}
             size={isMobile ? "icon" : "default"}
-            className="rounded-sm p-4 lg:rounded-xl lg:p-6 2xl:p-8.5"
+            className="rounded-sm p-4 lg:rounded-xl lg:p-6"
           >
             <Bookmark />
-            {!isMobile && <span className="2xl:text-lg">Add to Watchlist</span>}
+            {!isMobile && <span>Add to Watchlist</span>}
           </Button>
           <Button
             variant={"outline"}
             size={isMobile ? "icon" : "default"}
-            className="rounded-sm p-4 lg:rounded-xl lg:p-6 2xl:p-8.5"
+            className="rounded-sm p-4 lg:rounded-xl lg:p-6"
           >
             <Info />
-            {!isMobile && <span className="2xl:text-lg">View Details</span>}
+            {!isMobile && <span>View Details</span>}
           </Button>
           <div className="flex items-center gap-1">
-            <Star className="size-4 2xl:size-6 fill-yellow-300 stroke-none" />
-            <span className="flex items-center text-sm 2xl:text-lg font-bold">9.4</span>
+            <Star className="size-4 fill-yellow-300 stroke-none" />
+            <span className="flex items-center text-sm font-bold">9.4</span>
           </div>
         </div>
       </div>
       <div
         className={cn(
-          "absolute top-2 right-2 flex flex-col items-center gap-1 rounded-xl border border-teal-200/25 p-2 duration-300 sm:border-none sm:p-2 md:p-3 2xl:p-4 lg:top-6 lg:right-6",
+          "absolute top-2 right-2 flex flex-col items-center gap-1 rounded-xl border border-teal-200/25 p-2 duration-300 sm:border-none sm:p-2 md:p-3 lg:top-6 lg:right-6",
           isMobile ? "bg-background/70" : "bg-background/85"
         )}
       >
-        <span className="bg-clip-text text-lg 2xl:text-2xl font-bold text-accent-foreground sm:text-2xl">
+        <span className="bg-clip-text text-lg font-bold text-accent-foreground sm:text-2xl">
           99%
         </span>
-        <span className="text-[10px] tracking-wide text-muted-foreground sm:text-xs 2xl:text-base">
+        <span className="text-[10px] tracking-wide text-muted-foreground sm:text-xs">
           Match Score
         </span>
       </div>

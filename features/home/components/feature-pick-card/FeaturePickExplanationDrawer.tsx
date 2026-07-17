@@ -28,11 +28,11 @@ export default function FeaturePickExplanationDrawer({
     >
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle className="font-zalando font-semibold 2xl:text-xl">
+          <DrawerTitle className="font-zalando font-semibold">
             Why Mirai picked this for you today?
           </DrawerTitle>
         </DrawerHeader>
-        <p className="p-4 text-sm 2xl:text-lg text-muted-foreground">
+        <p className="p-4 text-sm text-muted-foreground">
           Based on your love of complex character introspection and
           world-building, Frieren&apos;s quiet meditation on time, loss, and meaning
           aligns perfectly with your taste profile. Its painterly animation and
@@ -40,11 +40,11 @@ export default function FeaturePickExplanationDrawer({
           consistently rate highest.
         </p>
         <DrawerFooter>
-          <Button className="bg-teal-200 duration-180 active:bg-teal-400 2xl:text-lg">
+          <Button className="bg-teal-200 duration-180 active:bg-teal-400">
             View Details
           </Button>
           <DrawerClose asChild>
-            <Button variant={"outline"} className="2xl:text-lg">Cancel</Button>
+            <Button variant={"outline"}>Cancel</Button>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>

@@ -15,7 +15,7 @@ export default function RankingHeader({ ranking, rating }: Props) {
     : ""
 
   return (
-    <div className="absolute top-1 flex w-full items-center justify-between px-1">
+    <div className="absolute top-2 flex w-full items-center justify-between px-2">
       <Badge className="bg-black/50">
         <Star className="size-4 fill-yellow-300 stroke-none" />
         <span className="text-xs font-bold text-accent-foreground">

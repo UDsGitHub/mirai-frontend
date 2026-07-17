@@ -5,8 +5,6 @@ import FriendsActivityCard from "./card/FriendsActivityCard"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 
-type Props = {}
-
 const exampleFriendsActivity: FriendsActivityType[] = [
   {
     id: "1",
@@ -119,7 +117,7 @@ const exampleFriendsActivity: FriendsActivityType[] = [
   },
 ]
 
-export default function FriendsActivitySection({}: Props) {
+export default function FriendsActivitySection() {
   const { ref: scrollRef } = useScrollContainer()
   return (
     <div className="flex flex-col sm:gap-2">
