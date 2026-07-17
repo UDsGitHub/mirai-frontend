@@ -12,7 +12,7 @@ type Props = {
 }
 
 export default function FriendsActivityCard({ activity }: Props) {
-  switch (activity.activityVerb) {
+  switch (activity.verb) {
     case ActivityVerb.RATED:
       return <ActivityRated activity={activity} />
     case ActivityVerb.COMPLETED:

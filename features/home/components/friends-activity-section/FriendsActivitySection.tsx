@@ -14,14 +14,16 @@ const exampleFriendsActivity: FriendsActivityType[] = [
         "https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg",
       displayName: "Yuki Tanaka",
     },
-    activityVerb: ActivityVerb.ADDED_TO_LIST,
+    verb: ActivityVerb.ADDED_TO_LIST,
     metadata: {
       animePreview: {
+        id: '1',
         titleEnglish: "Land of the Lustrous",
         coverUrl:
           "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_fbab7b0d53_5da5d6e4f0d3bea6.png",
         tagNames: ["Sci-Fi", "Fantasy"],
       },
+      isExistingWatchlistItem: false,
     },
     createdAt: new Date(),
   },
@@ -33,9 +35,10 @@ const exampleFriendsActivity: FriendsActivityType[] = [
         "https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg",
       displayName: "Marcus Lee",
     },
-    activityVerb: ActivityVerb.RATED,
+    verb: ActivityVerb.RATED,
     metadata: {
       animePreview: {
+        id: '2',
         titleEnglish: "Steins;Gate",
         coverUrl:
           "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_f5ae6f192c_bd3bba556219e827.png",
@@ -55,9 +58,10 @@ const exampleFriendsActivity: FriendsActivityType[] = [
         "https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg",
       displayName: "Reyes Sofia",
     },
-    activityVerb: ActivityVerb.COMPLETED,
+    verb: ActivityVerb.COMPLETED,
     metadata: {
       animePreview: {
+        id: '3',
         titleEnglish: "Neon Genesis Evangelion",
         coverUrl:
           "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_05c89345d6_f2feafee34a6616d.png",
@@ -74,16 +78,17 @@ const exampleFriendsActivity: FriendsActivityType[] = [
         "https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg",
       displayName: "Lee Marcus",
     },
-    activityVerb: ActivityVerb.SHARED_REC,
+    verb: ActivityVerb.SHARED_REC,
     metadata: {
       animePreview: {
+        id: '4',
         titleEnglish: "Neon Genesis Evangelion",
         coverUrl:
           "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_05c89345d6_f2feafee34a6616d.png",
         tagNames: ["Mecha", "Psychological"],
-        content:
-          "One of the greatest slow burns ever. The payoff is unforgettable.",
       },
+      content:
+        "One of the greatest slow burns ever. The payoff is unforgettable.",
     },
     createdAt: new Date("07/13/2026"),
   },
@@ -95,7 +100,7 @@ const exampleFriendsActivity: FriendsActivityType[] = [
         "https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg",
       displayName: "Lee Stronnin",
     },
-    activityVerb: ActivityVerb.STARTED_DISCUSSION,
+    verb: ActivityVerb.STARTED_DISCUSSION,
     metadata: {
       title: "Is Loli Ok in Anime? Or am I trippin",
     },
@@ -109,7 +114,7 @@ const exampleFriendsActivity: FriendsActivityType[] = [
         "https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg",
       displayName: "Bee Crusma",
     },
-    activityVerb: ActivityVerb.REPLIED_TO_DISCUSSION,
+    verb: ActivityVerb.REPLIED_TO_DISCUSSION,
     metadata: {
       title: "Are there too many Harem animes in circulation?",
     },

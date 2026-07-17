@@ -1,5 +1,5 @@
 import { AnimePreviewCardType } from "../types"
-import { Bookmark, Star } from "lucide-react"
+import { Bookmark, Plus, Star } from "lucide-react"
 import Image from "next/image"
 import { MAX_PREVIEW_TAGS } from "../constants"
 import { motion } from "motion/react"
@@ -60,7 +60,7 @@ export default function ExpandedCard({ previewInfo }: Props) {
             </span>
           </div>
           <Button variant={'outline'} className="text-muted-foreground">
-            <Bookmark />
+            <Plus />
             <span>Save</span>
           </Button>
         </div>

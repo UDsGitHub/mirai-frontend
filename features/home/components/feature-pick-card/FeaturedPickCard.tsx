@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { useIsMobile } from "@/hooks"
 import { cn } from "@/lib/utils"
-import { Bookmark, Bot, Info, Star } from "lucide-react"
+import { Bot, Info, Plus, Star } from "lucide-react"
 import FeaturePickExplanationDrawer from "./FeaturePickExplanationDrawer"
 import { useState } from "react"
 import TruncatedText from "@/components/ui/truncated-text"
@@ -96,7 +96,7 @@ export default function FeaturedPickCard() {
             size={isMobile ? "icon" : "default"}
             className="rounded-sm p-4 lg:rounded-xl lg:p-6"
           >
-            <Bookmark />
+            <Plus />
             {!isMobile && <span>Add to Watchlist</span>}
           </Button>
           <Button

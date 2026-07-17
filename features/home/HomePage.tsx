@@ -358,7 +358,7 @@ export default function HomePage() {
           previewList={exampleHiddenGemItems}
           sectionTitle={
             <div className="flex items-center gap-2">
-              <VenetianMask strokeWidth={3} className="stroke-teal-500" />
+              <VenetianMask strokeWidth={3} className="stroke-violet-500" />
               <span className="font-zalando text-base font-bold 3xl:text-xl">
                 Hidden Gems
               </span>
