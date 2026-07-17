@@ -76,6 +76,46 @@ const exampleWatchlistItems: AnimePreviewCardType[] = [
     synopsis: "",
     releaseDate: today,
   },
+  {
+    coverUrl:
+      "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_efa06df37d_dc3b8c3f43ad2dcf.png",
+    titleEnglish: "Odd Taxi",
+    tagNames: ["Mystery", "Drama"],
+    rating: Number((Math.random() * (10 - 6) + 6).toFixed(1)),
+    ratingCount: Math.round(Math.random() * (10 - 6) + 6),
+    synopsis: "",
+    releaseDate: today,
+  },
+  {
+    coverUrl:
+      "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_37872c02f9_adc2efa47f104896.png",
+    titleEnglish: "Monster",
+    tagNames: ["Thriller", "Mystery"],
+    rating: Number((Math.random() * (10 - 6) + 6).toFixed(1)),
+    ratingCount: Math.round(Math.random() * (10 - 6) + 6),
+    synopsis: "",
+    releaseDate: today,
+  },
+  {
+    coverUrl:
+      "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_60fcab8211_1641b04ef69d334b.png",
+    titleEnglish: "Ping Pong the Animation",
+    tagNames: ["Sports", "Drama"],
+    rating: Number((Math.random() * (10 - 6) + 6).toFixed(1)),
+    ratingCount: Math.round(Math.random() * (10 - 6) + 6),
+    synopsis: "",
+    releaseDate: today,
+  },
+  {
+    coverUrl:
+      "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_9bb8078702_2ecf7b3473abb85c.png",
+    titleEnglish: "Keep Your Hands Off Eizouken!",
+    tagNames: ["Comedy", "Slice of Life"],
+    rating: Number((Math.random() * (10 - 6) + 6).toFixed(1)),
+    ratingCount: Math.round(Math.random() * (10 - 6) + 6),
+    synopsis: "",
+    releaseDate: today,
+  },
 ]
 
 const exampleTrendingItems: AnimePreviewCardType[] = [
@@ -141,6 +181,50 @@ const exampleTrendingItems: AnimePreviewCardType[] = [
     tagNames: ["Romance", "Comedy"],
     rating: 8.2,
     ranking: 6,
+    ratingCount: Math.round(Math.random() * (10 - 6) + 6),
+    synopsis: "",
+    releaseDate: today,
+  },
+  {
+    coverUrl:
+      "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_7ee6e5dd7a_e13122c931f7db50.png",
+    titleEnglish: "Vinland Saga Season 2",
+    tagNames: ["Action", "Drama"],
+    rating: 9.0,
+    ranking: 7,
+    ratingCount: Math.round(Math.random() * (10 - 6) + 6),
+    synopsis: "",
+    releaseDate: today,
+  },
+  {
+    coverUrl:
+      "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_206c92433a_f70a2f47a30fc977.png",
+    titleEnglish: "Dungeon Meshi",
+    tagNames: ["Adventure", "Comedy"],
+    rating: 8.7,
+    ranking: 8,
+    ratingCount: Math.round(Math.random() * (10 - 6) + 6),
+    synopsis: "",
+    releaseDate: today,
+  },
+  {
+    coverUrl:
+      "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_c948ae9b1b_1015c9e7023ab7e2.png",
+    titleEnglish: "Orb: On the Movements of the Earth",
+    tagNames: ["Historical", "Drama"],
+    rating: 8.9,
+    ranking: 9,
+    ratingCount: Math.round(Math.random() * (10 - 6) + 6),
+    synopsis: "",
+    releaseDate: today,
+  },
+  {
+    coverUrl:
+      "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_39e58ad651_f55b3d81cf227a2e.png",
+    titleEnglish: "The Apothecary Diaries",
+    tagNames: ["Mystery", "Historical"],
+    rating: 8.8,
+    ranking: 10,
     ratingCount: Math.round(Math.random() * (10 - 6) + 6),
     synopsis: "",
     releaseDate: today,

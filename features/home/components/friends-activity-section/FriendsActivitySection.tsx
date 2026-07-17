@@ -17,11 +17,13 @@ const exampleFriendsActivity: FriendsActivityType[] = [
     verb: ActivityVerb.ADDED_TO_LIST,
     metadata: {
       animePreview: {
-        id: '1',
+        id: "1",
         titleEnglish: "Land of the Lustrous",
         coverUrl:
           "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_fbab7b0d53_5da5d6e4f0d3bea6.png",
         tagNames: ["Sci-Fi", "Fantasy"],
+        rating: 7.6,
+        ratingCount: 2300,
       },
       isExistingWatchlistItem: false,
     },
@@ -38,11 +40,13 @@ const exampleFriendsActivity: FriendsActivityType[] = [
     verb: ActivityVerb.RATED,
     metadata: {
       animePreview: {
-        id: '2',
+        id: "2",
         titleEnglish: "Steins;Gate",
         coverUrl:
           "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_f5ae6f192c_bd3bba556219e827.png",
         tagNames: ["Sci-Fi", "Thriller"],
+        rating: 7.6,
+        ratingCount: 2300,
       },
       rating: 9.4,
       content:
@@ -61,11 +65,13 @@ const exampleFriendsActivity: FriendsActivityType[] = [
     verb: ActivityVerb.COMPLETED,
     metadata: {
       animePreview: {
-        id: '3',
+        id: "3",
         titleEnglish: "Neon Genesis Evangelion",
         coverUrl:
           "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_05c89345d6_f2feafee34a6616d.png",
         tagNames: ["Mecha", "Psychological"],
+        rating: 7.6,
+        ratingCount: 2300,
       },
     },
     createdAt: new Date("07/13/2026"),
@@ -81,11 +87,13 @@ const exampleFriendsActivity: FriendsActivityType[] = [
     verb: ActivityVerb.SHARED_REC,
     metadata: {
       animePreview: {
-        id: '4',
+        id: "4",
         titleEnglish: "Neon Genesis Evangelion",
         coverUrl:
           "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_05c89345d6_f2feafee34a6616d.png",
         tagNames: ["Mecha", "Psychological"],
+        rating: 7.6,
+        ratingCount: 2300,
       },
       content:
         "One of the greatest slow burns ever. The payoff is unforgettable.",
@@ -102,7 +110,7 @@ const exampleFriendsActivity: FriendsActivityType[] = [
     },
     verb: ActivityVerb.STARTED_DISCUSSION,
     metadata: {
-      title: "Is Loli Ok in Anime? Or am I trippin",
+      title: "Is Loli Ok in Anime? Or am I trippin random text to fill some space so i can test overlap or truncation",
     },
     createdAt: new Date("07/13/2026"),
   },
@@ -117,6 +125,7 @@ const exampleFriendsActivity: FriendsActivityType[] = [
     verb: ActivityVerb.REPLIED_TO_DISCUSSION,
     metadata: {
       title: "Are there too many Harem animes in circulation?",
+      content: "thats a you problem buddy... how bout you watch something else."
     },
     createdAt: new Date("07/13/2026"),
   },
@@ -124,8 +133,9 @@ const exampleFriendsActivity: FriendsActivityType[] = [
 
 export default function FriendsActivitySection() {
   const { ref: scrollRef } = useScrollContainer()
+
   return (
-    <div className="flex flex-col sm:gap-2">
+    <div className="flex min-w-0 flex-col sm:gap-2">
       <div className="flex flex-col items-start justify-between sm:flex-row sm:items-center">
         <div className="flex items-center gap-2">
           <svg
@@ -154,9 +164,7 @@ export default function FriendsActivitySection() {
         </Button>
       </div>
       <div
-        className={
-          "no-scrollbar flex w-full items-center gap-4 overflow-x-auto pt-2"
-        }
+        className="scrollbar-hide flex w-full min-w-0 items-center gap-4 overflow-x-auto pt-2"
         ref={scrollRef}
       >
         {exampleFriendsActivity.map((activity) => (

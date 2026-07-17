@@ -1,11 +1,12 @@
 import { ActivityVerb } from "@/constants/enums"
-import { JSONValue } from "next/dist/server/config-shared"
 
 type AnimePreview = {
   id: string
   titleEnglish: string
   coverUrl: string
   tagNames: string[]
+  rating: number
+  ratingCount: number
 }
 
 export type ActivityMetaData = {
@@ -30,6 +31,7 @@ export type ActivityMetaData = {
   }
   [ActivityVerb.REPLIED_TO_DISCUSSION]: {
     title: string
+    content: string
   }
 }
 

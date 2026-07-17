@@ -1,5 +1,5 @@
 import { AnimePreviewCardType } from "../types"
-import { Bookmark, Plus, Star } from "lucide-react"
+import { Plus, Star } from "lucide-react"
 import Image from "next/image"
 import { MAX_PREVIEW_TAGS } from "../constants"
 import { motion } from "motion/react"
@@ -11,9 +11,11 @@ type Props = {
 }
 
 export default function ExpandedCard({ previewInfo }: Props) {
+  const title = previewInfo.titleEnglish
+
   return (
-    <motion.button
-      className="group p-4 flex gap-4 shrink-0 cursor-pointer overflow-hidden rounded-md border border-border bg-primary-foreground/50 duration-500 ease-in-out hover:-translate-y-1 focus:-translate-y-0.5 focus:outline-3 focus:outline-teal-200/75"
+    <motion.div
+      className="group relative p-4 flex gap-4 shrink-0 cursor-pointer overflow-hidden rounded-md border border-border bg-primary-foreground/50 duration-500 ease-in-out hover:-translate-y-1 focus:-translate-y-0.5"
       initial={{ opacity: 0, translateY: 16 }}
       animate={{ opacity: 1, translateY: 0 }}
       transition={{
@@ -21,10 +23,15 @@ export default function ExpandedCard({ previewInfo }: Props) {
         ease: "easeOut",
       }}
     >
+      <button
+        type="button"
+        aria-label={title}
+        className="absolute inset-0 z-0 rounded-md focus-visible:outline-3 focus-visible:outline-teal-200/75"
+      />
       <div className="relative h-[160px] w-[120px] cursor-pointer rounded-md overflow-hidden">
         <Image
           src={previewInfo.coverUrl ?? ''}
-          alt={previewInfo.titleEnglish}
+          alt={title}
           fill
           className="h-full w-full object-cover duration-500 ease-in-out group-hover:scale-105"
         />
@@ -33,7 +40,7 @@ export default function ExpandedCard({ previewInfo }: Props) {
         <div className="flex w-full flex-col items-start">
           <div className="flex w-full items-center justify-between">
             <span className="text-sm font-bold duration-300 group-hover:text-teal-200">
-              {previewInfo.titleEnglish}
+              {title}
             </span>
             <span className="text-xs">
               {previewInfo.releaseDate.getFullYear()}
@@ -65,6 +72,6 @@ export default function ExpandedCard({ previewInfo }: Props) {
           </Button>
         </div>
       </div>
-    </motion.button>
+    </motion.div>
   )
 }
