@@ -1,0 +1,1 @@
+export const INVALID_ACTIVITY_VERB = 'Invalid Activity Verb'

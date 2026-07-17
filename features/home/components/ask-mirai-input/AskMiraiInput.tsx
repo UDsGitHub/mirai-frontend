@@ -15,14 +15,18 @@ export default function AskMiraiInput() {
   const isMobile = useIsMobile()
 
   return (
-    <form className="relative flex flex-col justify-center gap-4 rounded-xl border border-teal-200/50 bg-muted/10 p-3 shadow-xl sm:shadow-2xl shadow-teal-200/20 before:pointer-events-none before:absolute before:inset-0 before:rounded-xl before:shadow-inner before:shadow-teal-200/50 before:content-[''] sm:p-6">
-      <div className="flex items-center">
-        <div className="flex size-8 items-center justify-center rounded-xl bg-teal-200 sm:size-10">
-          <Bot size={20} className="text-accent" />
+    <form className="relative isolate flex flex-col justify-center gap-4 rounded-xl border border-teal-200/50 bg-muted/10 p-3 shadow-xl shadow-teal-200/20 sm:p-6 sm:shadow-2xl">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0 rounded-xl ring-1 ring-teal-200/50 ring-inset"
+      />
+      <div className="relative z-10 flex items-center">
+        <div className="flex size-8 items-center justify-center rounded-xl bg-teal-200 sm:size-10 2xl:size-14">
+          <Bot className="text-accent size-5 2xl:size-7" />
         </div>
         <Textarea
           id="prompt-input"
-          className="field-sizing-content flex-1 resize-none border-none! bg-transparent! text-sm ring-0! outline-none! sm:text-base"
+          className="field-sizing-content flex-1 resize-none border-none! bg-transparent! text-sm ring-0! outline-none! sm:text-base 2xl:text-lg 2xl:px-3.5"
           placeholder={
             isMobile
               ? "What should I watch next?..."
@@ -30,13 +34,13 @@ export default function AskMiraiInput() {
           }
         />
         {isMobile ? (
-          <Button variant={"primary"} size={"icon"} className="rounded-2xl">
+          <Button variant={"primary"} size={"icon"} className="rounded-2xl before:hidden sm:before:block">
             <ArrowUp />
           </Button>
         ) : (
           <Button
             variant={"primary"}
-            className={"rounded-xl px-6 py-5 font-semibold"}
+            className={"rounded-xl px-6 py-5 2xl:px-8 2xl:py-7 font-semibold 2xl:text-xl"}
           >
             <WandSparkles />
             <span>Ask Mirai</span>
@@ -44,7 +48,7 @@ export default function AskMiraiInput() {
         )}
       </div>
       {!isMobile && (
-        <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+        <div className="relative z-10 flex flex-wrap items-center gap-2 2xl:gap-3 text-xs 2xl:text-base text-muted-foreground">
           <span>Try: </span>
           {examplePrompts.map((prompt) => (
             <SuggestedPrompt

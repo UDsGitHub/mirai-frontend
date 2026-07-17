@@ -59,7 +59,7 @@ export default function RootLayout({
           href="/assets/favicon/favicon-16x16.png"
         />
       </head>
-      <body className="h-full">
+      <body className="h-full cursor-default">
         <CustomClerkProvider>
           <App>{children}</App>
         </CustomClerkProvider>
