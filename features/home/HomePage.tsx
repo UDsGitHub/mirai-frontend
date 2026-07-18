@@ -1,7 +1,5 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { useAuth } from "@clerk/nextjs"
 import AskMiraiInput from "./components/ask-mirai-input/AskMiraiInput"
 import FeaturedPickCard from "./components/feature-pick-card/FeaturedPickCard"
 import { PreviewAnimeSection } from "./components/preview-anime-section"
@@ -363,8 +361,6 @@ const exampleHiddenGemItems: AnimePreviewCardType[] = [
 ]
 
 export default function HomePage() {
-  const { signOut } = useAuth()
-
   return (
     <div className="mx-auto min-h-svh w-full max-w-[1920px] p-4 sm:p-8 3xl:px-12">
       <div className="flex flex-col gap-12 3xl:gap-16">
@@ -425,7 +421,7 @@ export default function HomePage() {
               </span>
               <Badge
                 variant={"outline"}
-                className="border-teal-200 bg-teal-200/25 px-3 py-3 font-semibold text-teal-200"
+                className="border-teal-500 dark:border-teal-200 bg-teal-500/25 dark:bg-teal-200/25 px-3 py-3 font-semibold text-teal-500 dark:text-teal-200"
               >
                 Vinland Saga
               </Badge>
@@ -451,16 +447,6 @@ export default function HomePage() {
           useGrid
         />
         <FriendsActivitySection />
-      </div>
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2" onClick={() => signOut()}>
-            Sign Out
-          </Button>
-        </div>
       </div>
     </div>
   )

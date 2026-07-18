@@ -15,7 +15,7 @@ export default function FriendsActivityCardWrapper({ header, children }: Props) 
         duration: 0.36,
         ease: "easeOut",
       }}
-      className="group flex h-[232px] w-[420px] shrink-0 flex-col gap-4 rounded-md border border-border p-4 duration-500 ease-in-out focus-within:-translate-y-0.5 hover:-translate-y-1"
+      className="group flex h-[232px] w-[calc(100%-32px)] sm:w-[420px] shrink-0 flex-col gap-4 rounded-md border border-border p-4 duration-500 ease-in-out focus-within:-translate-y-0.5 hover:-translate-y-1"
     >
       {header}
       {children}

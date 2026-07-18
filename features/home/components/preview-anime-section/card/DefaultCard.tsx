@@ -25,7 +25,7 @@ export default function DefaultCard({
       <button
         type="button"
         aria-label={title}
-        className="absolute inset-0 z-0 rounded-md focus-visible:outline-3 focus-visible:outline-teal-200/75"
+        className="absolute inset-0 z-0 rounded-md focus-visible:outline-3 focus-visible:outline-teal-500/75 dark:focus-visible:outline-teal-200/75"
       />
 
       <motion.div
@@ -57,12 +57,12 @@ export default function DefaultCard({
             aria-label={`Add ${title}`}
             className="relative size-10 cursor-pointer rounded-lg bg-teal-200 duration-180 hover:bg-teal-400 focus:scale-95 focus:bg-teal-400 active:scale-95 active:bg-teal-400"
           >
-            <Plus />
+            <Plus className="text-accent-foreground dark:text-primary-foreground" />
           </Button>
         </div>
       </motion.div>
       <div className="relative flex flex-col gap-0.5 text-left">
-        <span className="text-sm font-bold duration-300 group-hover:text-teal-200 3xl:text-base">
+        <span className="text-sm font-bold duration-300 group-hover:text-teal-500 group-hover:dark:text-teal-200 3xl:text-base">
           {title}
         </span>
         <span className="truncate text-xs font-medium text-muted-foreground 3xl:text-sm">

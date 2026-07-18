@@ -54,30 +54,26 @@ export default function FeaturedPickCard() {
                 )
               })}
             </div>
-            <Badge variant={"outline"}>2023 ⋅ 23 ep</Badge>
+            <Badge
+              variant={"outline"}
+              className="flex items-center gap-1 border-muted-foreground text-primary-foreground dark:text-accent-foreground"
+            >
+              <span>2023</span>
+              <span className="font-bold">&bull;</span>
+              <span>23 ep</span>
+            </Badge>
           </div>
         </div>
-        <h1 className="line-clamp-2 max-w-3/4 shrink-0 font-zalando text-[1.25rem] leading-[1.45] font-bold sm:max-w-lg sm:text-[2.25rem] sm:leading-[1.45]">
+        <h1 className="line-clamp-2 max-w-3/4 shrink-0 font-zalando text-[1.25rem] leading-[1.45] font-bold text-primary-foreground sm:max-w-lg sm:text-[2.25rem] sm:leading-[1.45] dark:text-accent-foreground">
           Frieren: Beyond Journey&apos;s End
         </h1>
-        {isMobile ? (
-          <Button
-            variant={"link"}
-            onClick={openExplanationDrawer}
-            className="px-0"
-          >
-            <Info className="size-4" />
-            <span className="text-xs font-semibold underline">
-              Why Mirai picked this for you today?
-            </span>
-          </Button>
-        ) : (
-          <div className="flex max-w-[520px] gap-3 rounded-xl border border-teal-200/25 bg-background/50 p-4">
+        {!isMobile && (
+          <div className="flex max-w-[520px] gap-3 rounded-xl border border-teal-200/25 bg-black/50 p-4">
             <div className="flex size-7 shrink-0 items-center justify-center rounded-md bg-teal-200">
-              <Bot className="size-4 text-accent" />
+              <Bot className="size-4 text-black" />
             </div>
             <span className="line-clamp text-sm text-muted-foreground">
-              <span className="font-semibold text-foreground">
+              <span className="font-semibold text-primary-foreground dark:text-accent-foreground">
                 Why Mirai picked this for you today:
               </span>{" "}
               <TruncatedText onShowMore={openExplanationDrawer}>
@@ -94,7 +90,7 @@ export default function FeaturedPickCard() {
           <Button
             variant={"primary"}
             size={isMobile ? "icon" : "default"}
-            className="rounded-sm p-4 lg:rounded-xl lg:p-6"
+            className="rounded-sm p-4 text-accent-foreground lg:rounded-xl lg:p-6 dark:text-primary-foreground"
           >
             <Plus />
             {!isMobile && <span>Add to Watchlist</span>}
@@ -108,21 +104,23 @@ export default function FeaturedPickCard() {
             {!isMobile && <span>View Details</span>}
           </Button>
           <div className="flex items-center gap-1">
-            <Star className="size-4 fill-yellow-300 stroke-none" />
-            <span className="flex items-center text-sm font-bold">9.4</span>
+            <Star className="size-3 fill-yellow-300 stroke-none sm:size-4" />
+            <span className="flex items-center text-xs font-bold text-primary-foreground sm:text-sm dark:text-accent-foreground">
+              9.4
+            </span>
           </div>
         </div>
       </div>
       <div
         className={cn(
           "absolute top-2 right-2 flex flex-col items-center gap-1 rounded-xl border border-teal-200/25 p-2 duration-300 sm:border-none sm:p-2 md:p-3 lg:top-6 lg:right-6",
-          isMobile ? "bg-background/70" : "bg-background/85"
+          isMobile ? "bg-black/70" : "bg-black/85"
         )}
       >
-        <span className="bg-clip-text text-lg font-bold text-accent-foreground sm:text-2xl">
+        <span className="bg-clip-text text-lg font-bold text-primary-foreground sm:text-2xl dark:text-accent-foreground">
           99%
         </span>
-        <span className="text-[10px] tracking-wide text-muted-foreground sm:text-xs">
+        <span className="text-[10px] tracking-wide text-white sm:text-xs">
           Match Score
         </span>
       </div>

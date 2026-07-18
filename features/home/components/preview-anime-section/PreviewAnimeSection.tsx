@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import PreviewAnimeCard from "./PreviewAnimeCard"
 import { ReactNode } from "react"
+import { cn } from "@/lib/utils"
 
 type Props = {
   sectionTitle: ReactNode
@@ -23,10 +24,16 @@ export default function PreviewAnimeSection({
   const { ref: scrollRef } = useScrollContainer()
 
   return (
-    <div className="flex min-w-0 flex-col sm:gap-2">
+    <div className="flex min-w-0 flex-col items-start sm:items-stretch sm:gap-2">
       <div className="flex flex-col items-start justify-between sm:flex-row sm:items-center">
         <div className="flex items-center gap-2">{sectionTitle}</div>
-        <Button variant={"link"} className="px-0 text-teal-200 sm:px-2">
+        <Button
+          variant={"link"}
+          className={cn(
+            "px-0 text-teal-500 sm:px-2 dark:text-teal-200",
+            useGrid ? "hidden sm:flex" : "hidden"
+          )}
+        >
           <span>View All</span>
           <ArrowRight />
         </Button>
@@ -34,7 +41,7 @@ export default function PreviewAnimeSection({
       <div
         className={
           useGrid
-            ? "grid grid-cols-2 grid-rows-2 gap-4 pt-2 3xl:gap-6"
+            ? "grid grid-cols-1 grid-rows-2 gap-4 pt-2 sm:grid-cols-2 3xl:gap-6"
             : "scrollbar-hide flex w-full min-w-0 items-center gap-4 overflow-x-auto pt-2 3xl:gap-6"
         }
         ref={scrollRef}
@@ -49,6 +56,16 @@ export default function PreviewAnimeSection({
           />
         ))}
       </div>
+      <Button
+        variant={"link"}
+        className={cn(
+          "px-0 text-teal-500 sm:px-2 dark:text-teal-200",
+          useGrid ? "flex sm:hidden" : "hidden"
+        )}
+      >
+        <span>View All</span>
+        <ArrowRight />
+      </Button>
     </div>
   )
 }

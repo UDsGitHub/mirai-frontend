@@ -17,7 +17,7 @@ export default function MatchPecentageHeader({ matchPercentage, rating }: Props)
       </Badge>
       <Badge className="bg-black/50">
         <Star className="size-4 fill-yellow-300 stroke-none" />
-        <span className="text-xs font-bold text-accent-foreground">
+        <span className="text-xs font-bold text-primary-foreground dark:text-accent-foreground">
           {rating}
         </span>
       </Badge>

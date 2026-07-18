@@ -1,5 +1,6 @@
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
-import {AppHeader, AppSidebar} from "@/features/home"
+import { AppHeader, AppSidebar } from "@/features/home"
+import AppFooter from "@/features/home/layout/AppFooter"
 import React from "react"
 
 type Props = {
@@ -9,14 +10,13 @@ type Props = {
 export default function HomeLayout({ children }: Props) {
   return (
     <SidebarProvider
-      style={
-        { "--sidebar-width-icon": "4rem" } as React.CSSProperties
-      }
+      style={{ "--sidebar-width-icon": "4rem" } as React.CSSProperties}
     >
       <AppSidebar />
       <SidebarInset className="min-w-0">
         <AppHeader />
         {children}
+        <AppFooter />
       </SidebarInset>
     </SidebarProvider>
   )

@@ -15,14 +15,14 @@ export default function AskMiraiInput() {
   const isMobile = useIsMobile()
 
   return (
-    <form className="relative isolate flex flex-col justify-center gap-4 rounded-xl border border-teal-200/50 bg-muted/10 p-3 shadow-xl shadow-teal-200/20 sm:p-6 sm:shadow-2xl">
+    <form className="relative isolate flex flex-col justify-center gap-4 rounded-xl border border-teal-500/50 dark:border-teal-200/50 bg-muted/10 p-3 shadow-xl shadow-teal-200/20 sm:p-6 sm:shadow-2xl">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 z-0 rounded-xl ring-1 ring-teal-200/50 ring-inset"
       />
       <div className="relative z-10 flex items-center">
         <div className="flex size-8 items-center justify-center rounded-xl bg-teal-200 sm:size-10">
-          <Bot className="size-5 text-accent" />
+          <Bot className="size-5 text-black" />
         </div>
         <Textarea
           id="prompt-input"
@@ -34,13 +34,13 @@ export default function AskMiraiInput() {
           }
         />
         {isMobile ? (
-          <Button variant={"primary"} size={"icon"} className="rounded-2xl before:hidden sm:before:block">
+          <Button variant={"primary"} size={"icon"} className="rounded-2xl before:hidden sm:before:block text-accent-foreground dark:text-primary-foreground">
             <ArrowUp />
           </Button>
         ) : (
           <Button
             variant={"primary"}
-            className="rounded-xl px-6 py-5 font-semibold"
+            className="rounded-xl px-6 py-5 font-semibold text-accent-foreground dark:text-primary-foreground"
           >
             <WandSparkles />
             <span>Ask Mirai</span>

@@ -61,7 +61,7 @@ export default function ActivityAddedToList({ activity }: Props) {
               ratings
             </span>
           </div>
-          <Button variant={"ghost"} className="mt-auto">
+          <Button variant={"outline"} className="mt-auto">
             <Plus />
             <span>Save</span>
           </Button>

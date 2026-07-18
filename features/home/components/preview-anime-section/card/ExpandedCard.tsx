@@ -15,7 +15,7 @@ export default function ExpandedCard({ previewInfo }: Props) {
 
   return (
     <motion.div
-      className="group relative p-4 flex gap-4 shrink-0 cursor-pointer overflow-hidden rounded-md border border-border bg-primary-foreground/50 duration-500 ease-in-out hover:-translate-y-1 focus:-translate-y-0.5"
+      className="group relative flex shrink-0 cursor-pointer gap-4 overflow-hidden rounded-md border border-border bg-primary-foreground/50 p-4 duration-500 ease-in-out hover:-translate-y-1 focus-within:-translate-y-0.5"
       initial={{ opacity: 0, translateY: 16 }}
       animate={{ opacity: 1, translateY: 0 }}
       transition={{
@@ -23,14 +23,9 @@ export default function ExpandedCard({ previewInfo }: Props) {
         ease: "easeOut",
       }}
     >
-      <button
-        type="button"
-        aria-label={title}
-        className="absolute inset-0 z-0 rounded-md focus-visible:outline-3 focus-visible:outline-teal-200/75"
-      />
-      <div className="relative h-[160px] w-[120px] cursor-pointer rounded-md overflow-hidden">
+      <div className="relative h-[160px] w-[120px] cursor-pointer overflow-hidden rounded-md">
         <Image
-          src={previewInfo.coverUrl ?? ''}
+          src={previewInfo.coverUrl ?? ""}
           alt={title}
           fill
           className="h-full w-full object-cover duration-500 ease-in-out group-hover:scale-105"
@@ -39,7 +34,7 @@ export default function ExpandedCard({ previewInfo }: Props) {
       <div className="flex flex-1 flex-col items-start gap-3">
         <div className="flex w-full flex-col items-start">
           <div className="flex w-full items-center justify-between">
-            <span className="text-sm font-bold duration-300 group-hover:text-teal-200">
+            <span className="text-sm font-bold duration-300 group-hover:text-teal-500 dark:group-hover:text-teal-200">
               {title}
             </span>
             <span className="text-xs">
@@ -53,7 +48,7 @@ export default function ExpandedCard({ previewInfo }: Props) {
         <p className="text-left text-xs text-accent-foreground">
           {previewInfo.synopsis}
         </p>
-        <div className="mt-auto w-full flex items-center justify-between">
+        <div className="mt-auto flex w-full items-center justify-between">
           <div className="flex items-center gap-1">
             <div className="flex gap-0.5">
               <Star className="size-4 fill-yellow-300 stroke-none" />
@@ -66,7 +61,10 @@ export default function ExpandedCard({ previewInfo }: Props) {
               {numericalAmountFormatter.format(previewInfo.ratingCount)} ratings
             </span>
           </div>
-          <Button variant={'outline'} className="text-muted-foreground">
+          <Button
+            variant={"outline"}
+            className="cursor-pointer text-muted-foreground"
+          >
             <Plus />
             <span>Save</span>
           </Button>

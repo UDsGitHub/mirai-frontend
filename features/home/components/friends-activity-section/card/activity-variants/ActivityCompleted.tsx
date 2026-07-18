@@ -25,7 +25,7 @@ export default function ActivityCompleted({ activity }: Props) {
           createdAt={activity.createdAt}
           activityLabel={
             <div className={"flex items-center gap-1.5"}>
-              <CircleCheck className="size-4 text-green-300" />
+              <CircleCheck className="size-4 text-green-600 dark:text-green-300" />
               <span className={"text-xs text-muted-foreground"}>Completed</span>
             </div>
           }

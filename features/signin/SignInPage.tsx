@@ -127,7 +127,7 @@ export default function SignInPage() {
               }
               transition={{ duration: 0.3, delay: isPageReady ? 0.1 : 0 }}
             >
-              <Card className="h-full bg-neutral-800/25 backdrop-blur-lg">
+              <Card className="h-full bg-transparent dark:bg-neutral-800/25 backdrop-blur-lg border border-border dark:border-none">
                 <CardContent>
                   <div className="flex items-start gap-4">
                     <div className="rounded-full bg-[#00e5ff26] p-2">
@@ -151,7 +151,7 @@ export default function SignInPage() {
               }
               transition={{ duration: 0.3, delay: isPageReady ? 0.1 : 0 }}
             >
-              <Card className="h-full bg-neutral-800/25 backdrop-blur-lg">
+              <Card className="h-full bg-transparent dark:bg-neutral-800/25 backdrop-blur-lg border border-border dark:border-none">
                 <CardContent>
                   <div className="flex items-start gap-4">
                     <div className="rounded-full bg-[#b026ff26] p-2">
@@ -192,7 +192,7 @@ export default function SignInPage() {
               }
               transition={{ duration: 0.3, delay: isPageReady ? 0.2 : 0 }}
             >
-              <Card className="bg-neutral-800/25 backdrop-blur-lg">
+              <Card className="bg-transparent dark:bg-neutral-800/25 backdrop-blur-lg border border-border dark:border-none">
                 <CardHeader>
                   <CardTitle>
                     <div className="flex items-center gap-2">

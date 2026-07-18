@@ -25,12 +25,12 @@ const appearance = {
       colorInputForeground: "#ffffff",
     },
     elements: {
-      cardBox: "w-md",
-      card: "bg-neutral-800/25 backdrop-blur-lg",
+      cardBox: "w-md shadow-none dark:shadow-sm",
+      card: "bg-transparent dark:bg-neutral-800/25 backdrop-blur-lg",
       headerTitle: "text-2xl font-bold",
-      socialButtonsBlockButton: "py-3 rounded-lg text-white font-medium",
+      socialButtonsBlockButton: "py-3 rounded-lg text-accent-foreground dark:text-primary-foreground font-medium",
       formFieldLabel: "text-muted-foreground text-sm font-medium",
-      input: "rounded-lg py-6 px-4 bg-black/25!",
+      input: "rounded-lg py-6 px-4 dark:bg-black/25!",
       formFieldInput: "border-border rounded-lg py-6 px-4",
       formButtonPrimary: `py-3 rounded-lg text-white text-sm font-semibold bg-linear-to-r from-cyan-500 to-purple-500 
         border-none before:content-[''] before:absolute before:-inset-1 before:top-2 before:-z-10 

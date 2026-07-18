@@ -25,7 +25,7 @@ export default function AppHeader() {
         <Button size="icon" variant="outline">
           <Bell />
         </Button>
-        <Button size="icon" variant="outline" className="border-teal-200! border-17! rounded-full">
+        <Button size="icon" variant="outline" className="border-teal-500! dark:border-teal-200! border-17! rounded-full">
           <Avatar>
             <AvatarImage src={userProfile?.avatarUrl ?? ""} />
             <AvatarFallback>{userProfile?.displayName}</AvatarFallback>

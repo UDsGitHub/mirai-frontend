@@ -110,7 +110,8 @@ const exampleFriendsActivity: FriendsActivityType[] = [
     },
     verb: ActivityVerb.STARTED_DISCUSSION,
     metadata: {
-      title: "Is Loli Ok in Anime? Or am I trippin random text to fill some space so i can test overlap or truncation",
+      title:
+        "Is Loli Ok in Anime? Or am I trippin random text to fill some space so i can test overlap or truncation",
     },
     createdAt: new Date("07/13/2026"),
   },
@@ -125,7 +126,8 @@ const exampleFriendsActivity: FriendsActivityType[] = [
     verb: ActivityVerb.REPLIED_TO_DISCUSSION,
     metadata: {
       title: "Are there too many Harem animes in circulation?",
-      content: "thats a you problem buddy... how bout you watch something else."
+      content:
+        "thats a you problem buddy... how bout you watch something else.",
     },
     createdAt: new Date("07/13/2026"),
   },
@@ -139,7 +141,7 @@ export default function FriendsActivitySection() {
       <div className="flex flex-col items-start justify-between sm:flex-row sm:items-center">
         <div className="flex items-center gap-2">
           <svg
-            className="h-6 w-6 text-teal-200"
+            className="h-6 w-6 text-teal-500 dark:text-teal-200"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -158,7 +160,10 @@ export default function FriendsActivitySection() {
             Friends Activity
           </span>
         </div>
-        <Button variant={"link"} className="px-0 text-teal-200 sm:px-2">
+        <Button
+          variant={"link"}
+          className="px-0 text-teal-500 sm:px-2 dark:text-teal-200"
+        >
           <span>View All</span>
           <ArrowRight />
         </Button>
