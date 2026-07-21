@@ -15,7 +15,7 @@ export default function AskMiraiInput() {
   const isMobile = useIsMobile()
 
   return (
-    <form className="relative isolate flex flex-col justify-center gap-4 rounded-xl border border-teal-500/50 dark:border-teal-200/50 bg-muted/10 p-3 shadow-xl shadow-teal-200/20 sm:p-6 sm:shadow-2xl">
+    <form className="relative isolate flex flex-col justify-center gap-4 rounded-xl border border-teal-500/50 dark:border-teal-200/50 bg-muted/10 p-3 shadow-xl shadow-teal-200/25 sm:p-6 sm:shadow-2xl">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 z-0 rounded-xl ring-1 ring-teal-200/50 ring-inset"
