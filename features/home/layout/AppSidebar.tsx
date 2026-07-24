@@ -3,6 +3,7 @@
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -22,6 +23,7 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { type LucideIcon } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export type SidebarItem = {
   label: string
@@ -97,8 +99,9 @@ export default function AppSidebar() {
                 >
                   <SidebarMenuButton
                     asChild
-                    className={cn("group-data-[collapsible=icon]:mx-auto group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0! group-data-[collapsible=icon]:pl-2!", 
-                      "hover:bg-teal-500/25 data-active:bg-teal-500/50 duration-300 transition-all"
+                    className={cn(
+                      "group-data-[collapsible=icon]:mx-auto group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0! group-data-[collapsible=icon]:pl-2!",
+                      "transition-all duration-300 hover:bg-teal-900/30 data-active:bg-teal-500/25 data-active:border data-active:border-teal-200"
                     )}
                     tooltip={item.label}
                     isActive={isActive}
@@ -113,6 +116,13 @@ export default function AppSidebar() {
             })}
           </SidebarMenu>
         </SidebarContent>
+        <SidebarFooter>
+          <SidebarMenu>
+            <SidebarMenuItem className="flex items-center justify-center">
+              <ThemeToggle collapsed={!open} />
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarFooter>
       </Sidebar>
     </TooltipProvider>
   )

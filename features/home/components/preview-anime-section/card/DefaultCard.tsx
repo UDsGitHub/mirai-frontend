@@ -21,7 +21,7 @@ export default function DefaultCard({
   const title = previewInfo.titleEnglish
 
   return (
-    <div className="group relative flex w-[200px] shrink-0 cursor-pointer flex-col gap-3 rounded-md duration-500 ease-in-out hover:-translate-y-1 has-focus-visible:-translate-y-0.5 3xl:w-[300px]">
+    <div className="group relative flex w-50 shrink-0 cursor-pointer flex-col gap-3 rounded-md duration-500 ease-in-out hover:-translate-y-1 has-focus-visible:-translate-y-0.5 3xl:w-75">
       <button
         type="button"
         aria-label={title}
@@ -29,7 +29,7 @@ export default function DefaultCard({
       />
 
       <motion.div
-        className="relative h-[280px] w-full overflow-hidden rounded-md backface-hidden transform-3d 3xl:h-[420px]"
+        className="relative h-70 w-full overflow-hidden rounded-md backface-hidden transform-3d 3xl:h-105"
         initial={{ opacity: 0, rotateY: 60 }}
         whileInView={{ opacity: 1, rotateY: 0 }}
         viewport={{ once: true, amount: 0.1 }}

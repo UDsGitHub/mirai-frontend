@@ -97,7 +97,7 @@ export default function SignInPage() {
       aria-busy={!isPageReady}
     >
       <div className="fixed top-1/2 left-1/2 h-[20%] w-[20%] -translate-x-1/2 -translate-y-1/2 bg-radial from-purple-500 from-40% via-cyan-500 via-60% to-transparent to-100% opacity-15 blur-3xl" />
-      <div className="flex max-h-[734px] gap-12">
+      <div className="flex max-h-183.5 gap-12">
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           animate={isPageReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}

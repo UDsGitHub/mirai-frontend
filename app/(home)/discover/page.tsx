@@ -1,5 +1,5 @@
-export default function DiscoverPage() {
-  return (
-    <div>DiscoverPage</div>
-  )
+import DiscoverPage from "@/features/discover/DiscoverPage"
+
+export default function Page() {
+  return <DiscoverPage />
 }
